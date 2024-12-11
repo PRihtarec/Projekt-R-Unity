@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 73fc7d51ad8eadb488855d658ae1fd63
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainCamera: {instanceID: 0}
+  - minigameCamera: {instanceID: 0}
+  - arrowPrefab: {fileID: 3950343194264879070, guid: aff34aa0a1bf6e34a809ca49c770f885, type: 3}
+  - arrowCorrectPrefab: {fileID: 745011428254691294, guid: 8512fd55f701a0948bab59688ec93524, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
