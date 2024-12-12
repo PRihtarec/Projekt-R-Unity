@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "verzija test.sln"
+    "dotnet.defaultSolution": "Projekt-R-Unity.sln"
 }
