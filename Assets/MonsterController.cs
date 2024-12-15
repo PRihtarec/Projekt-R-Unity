@@ -8,6 +8,7 @@ public class MonsterController : MonoBehaviour
     private GameObject player;
     private NavMeshAgent agent;
     private Animator animator;
+    private Animator animator2;
     GameObject[] destinations;
     private bool aggro;
     private int destinationIndex;
@@ -16,13 +17,16 @@ public class MonsterController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("player");
         agent = GetComponent<NavMeshAgent>();
         Transform childTransform = transform.Find("Creep_mesh");
+        Transform childTransform2 = transform.Find("Creep_mesh_lod1");
         animator = childTransform.GetComponent<Animator>();
+        animator2 = childTransform2.GetComponent<Animator>();
         destinations = GameObject.FindGameObjectsWithTag("destination");
         aggro = false;
         destinationIndex = Random.Range(0, destinations.Length);
         agent.autoBraking = false;
         agent.isStopped = false;
         animator.SetBool("isWalking", true);
+        animator2.SetBool("isWalking", true);
         agent.speed = 2;
         GotoNextPoint();
     }
@@ -39,6 +43,7 @@ public class MonsterController : MonoBehaviour
          //   animator.SetBool("isWalking", true);
           //  agent.speed = 2;
             if (!agent.pathPending && agent.remainingDistance < 0.5f){
+
                 GotoNextPoint();
             }
         }
@@ -66,13 +71,18 @@ public class MonsterController : MonoBehaviour
             if (aggro){
                 agent.speed=3;
                 animator.SetBool("isRunning", true);
+                animator2.SetBool("isRunning", true);
             }
             else{
                 agent.speed=2;
                 animator.SetBool ("isRunning", false);
+                animator2.SetBool("isRunning", true);
             }
         }
         public bool getAggro(){
             return aggro;
+        }
+        private void ArrivedAtLocation(){
+            
         }
 }
