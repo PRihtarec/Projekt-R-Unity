@@ -18369,6 +18369,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -9.817936
       objectReference: {fileID: 0}
+    - target: {fileID: 5981218730283738843, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981218730591916999, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6120405662535661880, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -26.024384
@@ -25163,6 +25171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b8956f65074074dafeb4e11873cab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDetectionRange: 5
 --- !u!195 &1732671716
 NavMeshAgent:
   m_ObjectHideFlags: 0

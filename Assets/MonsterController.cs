@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
 public class MonsterController : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameObject player;
     private NavMeshAgent agent;
     private Animator animator;
@@ -12,6 +12,9 @@ public class MonsterController : MonoBehaviour
     GameObject[] destinations;
     private bool aggro;
     private int destinationIndex;
+    private bool hasSniffed;  
+    public float playerDetectionRange = 5f; 
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("player");
@@ -23,6 +26,7 @@ public class MonsterController : MonoBehaviour
         destinations = GameObject.FindGameObjectsWithTag("destination");
         aggro = false;
         destinationIndex = Random.Range(0, destinations.Length);
+        hasSniffed = false;  
         agent.autoBraking = false;
         agent.isStopped = false;
         animator.SetBool("isWalking", true);
@@ -31,58 +35,112 @@ public class MonsterController : MonoBehaviour
         GotoNextPoint();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (aggro){
+        if (aggro)
+        {
             agent.SetDestination(player.transform.position);
-        //    animator.SetBool("isWalking", true);
-          //  agent.speed = 3;
         }
-        else{
-         //   animator.SetBool("isWalking", true);
-          //  agent.speed = 2;
-            if (!agent.pathPending && agent.remainingDistance < 0.5f){
-
-                GotoNextPoint();
+        else
+        {
+            if (!agent.pathPending && agent.remainingDistance < 0.5f && !hasSniffed)
+            {
+                
+                ArrivedAtLocation();
             }
         }
-        
     }
-            void GotoNextPoint() {
-            // Returns if no points have been set up
-            if (destinations.Length == 0)
-                return;
 
-            // Set the agent to go to the currently selected destination.
-            agent.destination = destinations[destinationIndex].transform.position;
+    void GotoNextPoint()
+    {
+        if (destinations.Length == 0)
+            return;
 
-            // Choose the next point in the array as the destination,
-            // cycling to the start if necessary.
-            int newDestinationIndex = Random.Range(0, destinations.Length);
-            while (destinationIndex == newDestinationIndex){
-                newDestinationIndex = Random.Range(0, destinations.Length);
-            }
-            destinationIndex = newDestinationIndex;
-        }
-        public void setAggro (bool ifAggro){
-            aggro = ifAggro;
+        agent.destination = destinations[destinationIndex].transform.position;
 
-            if (aggro){
-                agent.speed=3;
-                animator.SetBool("isRunning", true);
-                animator2.SetBool("isRunning", true);
-            }
-            else{
-                agent.speed=2;
-                animator.SetBool ("isRunning", false);
-                animator2.SetBool("isRunning", true);
-            }
+        int newDestinationIndex = Random.Range(0, destinations.Length);
+        while (destinationIndex == newDestinationIndex)
+        {
+            newDestinationIndex = Random.Range(0, destinations.Length);
         }
-        public bool getAggro(){
-            return aggro;
+        destinationIndex = newDestinationIndex;
+        hasSniffed = false;  
+    }
+
+    public void setAggro(bool ifAggro)
+    {
+        aggro = ifAggro;
+
+        if (aggro)
+        {
+            agent.speed = 3;
+            animator.SetBool("isWalking", false);
+            animator2.SetBool("isWalking", false);
+            animator.SetBool("isRunning", true);
+            animator2.SetBool("isRunning", true);
         }
-        private void ArrivedAtLocation(){
-            
+        else
+        {
+            agent.speed = 2;
+            animator.SetBool("isRunning", false);
+            animator2.SetBool("isRunning", false);
+            animator.SetBool("isWalking", true);
+            animator2.SetBool("isWalking", true);
         }
+    }
+
+    public bool getAggro()
+    {
+        return aggro;
+    }
+
+    private void ArrivedAtLocation()
+    {
+     
+        agent.isStopped = true;
+
+     
+        animator.SetBool("isWalking", false);
+        animator2.SetBool("isWalking", false);
+        animator.SetTrigger("Sniff");
+        animator2.SetTrigger("Sniff");
+
+      
+        hasSniffed = true;
+
+        
+        StartCoroutine(WaitForSniffAndCheckPlayer());
+    }
+
+    private IEnumerator WaitForSniffAndCheckPlayer()
+    {
+    
+        yield return new WaitForSeconds(4.5f); 
+
+       
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        if (distanceToPlayer <= playerDetectionRange)
+        {
+          
+            animator.SetTrigger("Roar");
+            animator2.SetTrigger("Roar");
+            setAggro(true);
+
+          
+            yield return new WaitForSeconds(4.5f); 
+        }
+
+   
+        agent.isStopped = false;
+
+      
+        animator.SetBool("isWalking", true);
+        animator2.SetBool("isWalking", true);
+
+        
+        if (!aggro)
+        {
+            GotoNextPoint();
+        }
+    }
 }

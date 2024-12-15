@@ -18,11 +18,11 @@ public class AggroController : MonoBehaviour
     void Update()
     {
         distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
-        if (distanceToPlayer < 1){
-            if (!monsterController.getAggro()){
-                monsterController.setAggro(true);
-            }
-        }
+       // if (distanceToPlayer < 1){
+       //     if (!monsterController.getAggro()){
+      //          monsterController.setAggro(true);
+      //      }
+      //  }
 
     }
 }
