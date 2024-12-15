@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         minigame = FindObjectOfType<MinigameStart>();
 
+        walkSpeed = moveSpeed; 
+        sprintSpeed = moveSpeed * 1.5f; 
     }
 
     private void Update()
@@ -86,6 +89,16 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+        // Check if sprinting
+        if (Input.GetKey(sprintKey))
+        {
+            moveSpeed = sprintSpeed;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
         }
     }
 
