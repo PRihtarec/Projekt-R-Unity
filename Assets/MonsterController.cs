@@ -12,8 +12,11 @@ public class MonsterController : MonoBehaviour
     GameObject[] destinations;
     private bool aggro;
     private int destinationIndex;
-    private bool hasSniffed;  
-    public float playerDetectionRange = 5f; 
+    private bool hasSniffed;
+    public float playerDetectionRange = 5f;
+    public bool interrupt;
+
+    private Coroutine sniffCoroutine; 
 
     void Start()
     {
@@ -26,7 +29,7 @@ public class MonsterController : MonoBehaviour
         destinations = GameObject.FindGameObjectsWithTag("destination");
         aggro = false;
         destinationIndex = Random.Range(0, destinations.Length);
-        hasSniffed = false;  
+        hasSniffed = false;
         agent.autoBraking = false;
         agent.isStopped = false;
         animator.SetBool("isWalking", true);
@@ -45,9 +48,14 @@ public class MonsterController : MonoBehaviour
         {
             if (!agent.pathPending && agent.remainingDistance < 0.5f && !hasSniffed)
             {
-                
                 ArrivedAtLocation();
             }
+        }
+
+     
+        if (aggro && sniffCoroutine != null)
+        {
+            InterruptSniffAndAttack();
         }
     }
 
@@ -64,31 +72,56 @@ public class MonsterController : MonoBehaviour
             newDestinationIndex = Random.Range(0, destinations.Length);
         }
         destinationIndex = newDestinationIndex;
-        hasSniffed = false;  
+        hasSniffed = false;
     }
 
-    public void setAggro(bool ifAggro)
+public void setAggro(bool ifAggro)
+{
+   
+    if (ifAggro && !aggro)
     {
-        aggro = ifAggro;
-
-        if (aggro)
-        {
-            agent.speed = 3;
-            animator.SetBool("isWalking", false);
-            animator2.SetBool("isWalking", false);
-            animator.SetBool("isRunning", true);
-            animator2.SetBool("isRunning", true);
-        }
-        else
-        {
-            agent.speed = 2;
-            animator.SetBool("isRunning", false);
-            animator2.SetBool("isRunning", false);
-            animator.SetBool("isWalking", true);
-            animator2.SetBool("isWalking", true);
-        }
+        StartCoroutine(PerformRoarBeforeAggro());
     }
 
+    aggro = ifAggro;
+
+    if (aggro)
+    {
+        agent.speed = 3;
+        animator.SetBool("isWalking", false);
+        animator2.SetBool("isWalking", false);
+        animator.SetBool("isRunning", true);
+        animator2.SetBool("isRunning", true);
+    }
+    else
+    {
+        agent.speed = 2;
+        animator.SetBool("isRunning", false);
+        animator2.SetBool("isRunning", false);
+        animator.SetBool("isWalking", true);
+        animator2.SetBool("isWalking", true);
+    }
+}
+private IEnumerator PerformRoarBeforeAggro()
+{
+
+    agent.isStopped = true;
+
+
+    animator.SetTrigger("Roar");
+    animator2.SetTrigger("Roar");
+
+  
+    yield return new WaitForSeconds(4.5f);
+
+   
+    agent.isStopped = false;
+
+    if (aggro)
+    {
+        agent.SetDestination(player.transform.position);
+    }
+}
     public bool getAggro()
     {
         return aggro;
@@ -96,51 +129,61 @@ public class MonsterController : MonoBehaviour
 
     private void ArrivedAtLocation()
     {
-     
         agent.isStopped = true;
 
-     
         animator.SetBool("isWalking", false);
         animator2.SetBool("isWalking", false);
         animator.SetTrigger("Sniff");
         animator2.SetTrigger("Sniff");
 
-      
         hasSniffed = true;
 
-        
-        StartCoroutine(WaitForSniffAndCheckPlayer());
+      
+        sniffCoroutine = StartCoroutine(WaitForSniffAndCheckPlayer());
     }
 
     private IEnumerator WaitForSniffAndCheckPlayer()
     {
-    
         yield return new WaitForSeconds(4.5f); 
 
-       
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= playerDetectionRange)
         {
-          
             animator.SetTrigger("Roar");
             animator2.SetTrigger("Roar");
             setAggro(true);
 
-          
             yield return new WaitForSeconds(4.5f); 
         }
 
-   
         agent.isStopped = false;
 
-      
         animator.SetBool("isWalking", true);
         animator2.SetBool("isWalking", true);
 
-        
         if (!aggro)
         {
             GotoNextPoint();
         }
     }
+
+private void InterruptSniffAndAttack()
+{
+   
+    if (sniffCoroutine != null)
+    {
+        StopCoroutine(sniffCoroutine);
+        sniffCoroutine = null;
+    }
+
+   
+    animator.ResetTrigger("Sniff");
+    animator2.ResetTrigger("Sniff");
+
+   
+    StartCoroutine(PerformRoarBeforeAggro());
+
+  
+    aggro = true;
+}
 }

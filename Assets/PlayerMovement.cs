@@ -141,4 +141,9 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
     }
+    public bool IsPlayerMovingByInput()
+{
+    // Check if there's any non-zero input
+    return horizontalInput != 0 || verticalInput != 0;
+}
 }
