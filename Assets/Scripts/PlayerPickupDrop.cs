@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerPickupDrop : MonoBehaviour
 {   
-    [SerializeField] private Transform playerCameraTransform;
+    [SerializeField] private Transform playerCameraPosition;
+    [SerializeField] private Transform playerCameraRotation;
     [SerializeField] private Transform objectGrabPointTransform;
     [SerializeField] private LayerMask pickUpLayerMask;
     [SerializeField] private float pickUpRange=2f;
@@ -12,7 +13,7 @@ public class PlayerPickupDrop : MonoBehaviour
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E)){
             if (objectGrabbable == null){ //pokusavamo uzeti
-                if(Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit,pickUpRange, pickUpLayerMask)){
+                if(Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit,pickUpRange, pickUpLayerMask)){
                     Debug.Log(raycastHit);
                     if(raycastHit.transform.TryGetComponent(out objectGrabbable)){
                         objectGrabbable.Grab(objectGrabPointTransform);

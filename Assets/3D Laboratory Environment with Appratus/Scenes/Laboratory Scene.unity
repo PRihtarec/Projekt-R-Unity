@@ -13789,8 +13789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26b4ee9f3b1f964e9526461ef032860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 400
-  sensY: 400
+  sensX: 100
+  sensY: 100
   orientation: {fileID: 570231572}
 --- !u!1001 &970782723
 PrefabInstance:
@@ -23526,7 +23526,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: c7375663ec0fef4499eb0f39ecdd6a30, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -25172,6 +25172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDetectionRange: 5
+  interrupt: 0
 --- !u!195 &1732671716
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -27333,7 +27334,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895832715}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0002e1810f48b2841996ee87740e5a0b, type: 3}
   m_Name: 
@@ -28958,6 +28959,7 @@ MonoBehaviour:
   walkSpeed: 0
   sprintSpeed: 0
   jumpKey: 32
+  sprintKey: 304
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -28989,7 +28991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3930549912ec19f4296b7bf0e09808da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCameraTransform: {fileID: 1895832717}
+  playerCameraPosition: {fileID: 1895832717}
+  playerCameraRotation: {fileID: 963194228}
   objectGrabPointTransform: {fileID: 478100761}
   pickUpLayerMask:
     serializedVersion: 2
