@@ -6597,12 +6597,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478100760}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.268, y: -0.122, z: 0.731}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.26800013, y: -0.12199998, z: 0.73099995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1895832717}
+  m_Father: {fileID: 963194228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &487302066
 PrefabInstance:
@@ -13750,7 +13750,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 478100761}
   m_Father: {fileID: 1895832717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!320 &963194230
@@ -20920,7 +20921,8 @@ GameObject:
   - component: {fileID: 1418042641}
   - component: {fileID: 1418042643}
   - component: {fileID: 1418042642}
-  m_Layer: 5
+  - component: {fileID: 1418042644}
+  m_Layer: 9
   m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20981,6 +20983,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418042640}
   m_CullTransparentMesh: 1
+--- !u!65 &1418042644
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418042640}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.62114716}
+  m_Center: {x: 0, y: 0, z: 0.18942642}
 --- !u!1001 &1431780337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27324,7 +27347,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
-  - {fileID: 478100761}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1895832718
@@ -28997,6 +29019,9 @@ MonoBehaviour:
   pickUpLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  minigameLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   pickUpRange: 2
 --- !u!1001 &2009214118
 PrefabInstance:

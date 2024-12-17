@@ -13,6 +13,8 @@ public class MinigameStart : MonoBehaviour
     public GameObject[] arrows;
     public int arrowCount;
     public int currentArrow;
+    
+    private BoxCollider RawImage; //detekcija minigamea
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,7 @@ public class MinigameStart : MonoBehaviour
         minigameCamera.enabled = false;
         gameStarted = false;
     }
-    void StartMinigame()
+    public void StartMinigame()
     {
         mainCamera.enabled = false;
         minigameCamera.enabled = true;
@@ -49,6 +51,7 @@ public class MinigameStart : MonoBehaviour
     void EndMinigame()
     {
         mainCamera.enabled = true;
+        
         minigameCamera.enabled = false;
         gameStarted = false;
 
@@ -76,16 +79,9 @@ public class MinigameStart : MonoBehaviour
     }
     void Update()
     {
-        if (!gameStarted) // ako nije u igri
-        {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                StartMinigame();
-            }
-        }
 
 
-        else
+        if (gameStarted)
         { // ako je u igri
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)) //ako je stisno nes za igru
             {
