@@ -7,6 +7,7 @@ TagManager:
   - player
   - destination
   - Flashlight
+  - EndCamera
   layers:
   - Default
   - TransparentFX
