@@ -11,15 +11,19 @@ public class PlayerCam : MonoBehaviour
 
     float xRotation;
     float yRotation;
+    MinigameStart minigame;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        minigame = FindObjectOfType<MinigameStart>();
     }
 
     private void Update()
     {
+        if (!minigame.gameStarted){
         // get mouse input
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensY;
@@ -32,5 +36,6 @@ public class PlayerCam : MonoBehaviour
         // rotate cam and orientation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
     }
 }

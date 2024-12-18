@@ -16,6 +16,8 @@ public class MinigameStart : MonoBehaviour
     
     private BoxCollider RawImage; //detekcija minigamea
 
+    [SerializeField] private Door door; //vrata koja se otvaraju
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +78,10 @@ public class MinigameStart : MonoBehaviour
             Destroy(arrows[i]);
         }
         arrowCount=0;
+
+        door.openClose();
+        //gameObject.SetActive(false);   //Cijeli folder s minigamemom nestane moguce da to zelimo
+        transform.GetChild(1).GetComponent<Collider>().enabled = false; //micem collider s minigre i vise ne mogu pokrenuti mini igru
     }
     void Update()
     {
