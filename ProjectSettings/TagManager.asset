@@ -8,6 +8,8 @@ TagManager:
   - destination
   - Flashlight
   - EndCamera
+  - Wall
+  - monster
   layers:
   - Default
   - TransparentFX
