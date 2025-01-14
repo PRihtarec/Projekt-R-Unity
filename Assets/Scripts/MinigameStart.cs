@@ -9,7 +9,7 @@ public class MinigameStart : MonoBehaviour
     public GameObject arrowPrefab;
     public GameObject arrowCorrectPrefab;
     public int[] rotations;
-    public bool gameStarted = false;
+    private bool gameStarted = false;
     public GameObject[] arrows;
     public int arrowCount;
     public int currentArrow;
@@ -159,6 +159,9 @@ public class MinigameStart : MonoBehaviour
         mainCamera.enabled = !mainCamera.enabled;
         minigameCamera.enabled = !minigameCamera.enabled;
         // Code here is called when the GameObject is clicked on.
+    }
+    public bool isGameStarted(){
+        return gameStarted;
     }
 
     int[] GenerateRandomRotations(int count)

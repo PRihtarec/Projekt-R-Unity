@@ -44,14 +44,16 @@ public class PlayerPickupDrop : MonoBehaviour
 
                 MinigameStart minigameStart = parentTransform.GetComponent<MinigameStart>();
 
-                if (minigameStart != null && !minigameStart.gameStarted) {
+                if (minigameStart != null && !minigameStart.isGameStarted()) {
                     minigameStart.StartMinigame();  // pokrecemo minigame
                     UnityEngine.Debug.Log("Minigame pokrenut!");
                  }
                 }
                 else if (raycastHit2.transform.name == "VentGame"){
                     VentGame ventGame = raycastHit2.transform.GetComponent<VentGame>();
+                    if (!ventGame.isGameStarted()){
                     ventGame.StartMinigame();
+                    }
                 }
 
                 

@@ -64,7 +64,7 @@ public class VentGame : MonoBehaviour
     }
 
     public void EndMinigame()
-    {
+    {   currentCircleIndex = 0;
         mainCamera.enabled = true;
         minigameCamera.enabled = false;
 
@@ -141,6 +141,9 @@ public class VentGame : MonoBehaviour
 
         // Ensure the object reaches the target position at the end
         vent.transform.position = targetPosition;
+    }
+    public bool isGameStarted(){
+        return gameStarted;
     }
     void Update()
     {

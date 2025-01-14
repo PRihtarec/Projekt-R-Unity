@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!minigame.gameStarted){
+        if (!minigame.isGameStarted()){
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         
@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!minigame.gameStarted){
+        if (!minigame.isGameStarted()){
         MovePlayer();
         }
     }
