@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public float normalHeight = 1.3f;
+    public float crouchingHeight = 0.8f;
     bool readyToJump;
 
     [HideInInspector] public float walkSpeed;
@@ -100,6 +102,17 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = walkSpeed;
         }
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Vector3 currentScale = transform.localScale;
+            transform.localScale = new Vector3(currentScale.x, crouchingHeight, currentScale.z);
+        }
+        else
+        {
+            Vector3 currentScale = transform.localScale;
+            transform.localScale = new Vector3(currentScale.x, normalHeight, currentScale.z);
+        }
+
     }
 
     private void MovePlayer()
