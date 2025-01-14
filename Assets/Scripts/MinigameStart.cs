@@ -131,7 +131,7 @@ public class MinigameStart : MonoBehaviour
             // Set anchored position within the Canvas
             //rectTransform.anchoredPosition = new Vector2(Random.Range(-200, 200), Random.Range(-100, 100));
             rectTransform.anchoredPosition = new Vector2(x + place * 0.15f, y);
-            rectTransform.rotation = Quaternion.Euler(0, 0, rotation);
+            rectTransform.localRotation = Quaternion.Euler(0, 0, rotation);
         }
         arrow.transform.SetAsLastSibling();
         }
@@ -147,7 +147,7 @@ public class MinigameStart : MonoBehaviour
             // Set anchored position within the Canvas
             //rectTransform.anchoredPosition = new Vector2(Random.Range(-200, 200), Random.Range(-100, 100));
             rectTransform.anchoredPosition = new Vector2(x + place * 0.15f, y);
-            rectTransform.rotation = Quaternion.Euler(0, 0, rotation);
+            rectTransform.localRotation = Quaternion.Euler(0, 0, rotation);
         }
         arrow.transform.SetAsLastSibling();
         }
