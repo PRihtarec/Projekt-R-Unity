@@ -23,7 +23,7 @@ public class PlayerCam : MonoBehaviour
 
     private void Update()
     {
-        if (!minigame.gameStarted){
+        if (!minigame.isGameStarted()){
         // get mouse input
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensY;

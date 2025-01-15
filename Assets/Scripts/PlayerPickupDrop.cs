@@ -38,14 +38,25 @@ public class PlayerPickupDrop : MonoBehaviour
         if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit2, pickUpRange, minigameLayerMask)) {
                 Debug.Log(raycastHit2.transform.name);
 
-                Transform parentTransform = raycastHit2.transform.parent; //trazimo roditelja(folder)
+                if (raycastHit2.transform.name == "RawImage"){
+                    Transform parentTransform = raycastHit2.transform.parent; //trazimo roditelja(folder)
+                
 
                 MinigameStart minigameStart = parentTransform.GetComponent<MinigameStart>();
 
-                if (minigameStart != null && !minigameStart.gameStarted) {
+                if (minigameStart != null && !minigameStart.isGameStarted()) {
                     minigameStart.StartMinigame();  // pokrecemo minigame
-                    Debug.Log("Minigame pokrenut!");
+                    UnityEngine.Debug.Log("Minigame pokrenut!");
                  }
+                }
+                else if (raycastHit2.transform.name == "VentGame"){
+                    VentGame ventGame = raycastHit2.transform.GetComponent<VentGame>();
+                    if (!ventGame.isGameStarted()){
+                    ventGame.StartMinigame();
+                    }
+                }
+
+                
             }
         }
     }
