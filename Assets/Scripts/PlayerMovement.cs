@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
+    [HideInInspector] public float crouchSpeed;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
         walkSpeed = moveSpeed; 
         sprintSpeed = moveSpeed * 1.5f; 
+        crouchSpeed = moveSpeed  * 0.5f;
     }
 
     private void Update()
@@ -94,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check if sprinting
-        if (Input.GetKey(sprintKey))
+        if (Input.GetKey(sprintKey) && !Input.GetKey(KeyCode.LeftControl))
         {
             moveSpeed = sprintSpeed;
         }
@@ -106,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 currentScale = transform.localScale;
             transform.localScale = new Vector3(currentScale.x, crouchingHeight, currentScale.z);
+            moveSpeed = crouchSpeed;
         }
         else
         {
