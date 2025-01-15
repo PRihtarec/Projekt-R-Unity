@@ -17,7 +17,7 @@ public class MonsterController : MonoBehaviour
     public bool interrupt;
 
     private Coroutine sniffCoroutine; 
-    private Camera mainCamera;
+    public Camera mainCamera;
 
     void Start()
     {
@@ -44,6 +44,7 @@ public class MonsterController : MonoBehaviour
         if (aggro)
         {
             agent.SetDestination(player.transform.position);
+            isPlayerInSafeRoom();
         }
         else
         {
@@ -191,7 +192,11 @@ public float getPlayerDistance(){
     return Vector3.Distance(transform.position, player.transform.position);
 }
 public bool isPlayerInSafeRoom(){
-    return player.transform.position.x>=-83 && player.transform.position.x<-76 && player.transform.position.z>=-1 && player.transform.position.z<=10;
+    bool safe = player.transform.position.x>=-83 && player.transform.position.x<-76 && player.transform.position.z>=-1 && player.transform.position.z<=10;
+    if (safe){
+        setAggro(false);
+    }
+    return safe;
 }
 public bool isInViewOfPlayer(){
     Vector3 viewportPos = mainCamera.WorldToViewportPoint(gameObject.transform.position);

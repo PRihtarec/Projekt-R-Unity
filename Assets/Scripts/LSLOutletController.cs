@@ -76,6 +76,7 @@ public class LSLOutletController : MonoBehaviour
             failoMinigame = gamesController.isMinigameLost();
             flashlightUpaljen = flashlight.isFlashlightActive();
             vidljivoCudoviste = monsterController.isInViewOfPlayer();
+            igraMinigame = gamesController.isMinigameInProgress();
 
             // First array of bool values converted to floats (1 for true, 0 for false)
             data[0] = hoda ? 1.0f : 0.0f;
@@ -93,7 +94,7 @@ public class LSLOutletController : MonoBehaviour
             // saferoom is just a boolean, we map it to float (1 or 0)
             // If you want this in a specific order, adjust the index accordingly.
             // For example, you can put saferoom in the 9th index, as an optional change.
-             data[10] = saferoom ? 1.9f : 0.0f; 
+            data[10] = saferoom ? 1.9f : 0.0f; 
 
             // Push the sample to the outlet
             streamOutlet.push_sample(data);
