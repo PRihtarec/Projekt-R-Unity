@@ -43266,7 +43266,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhysiolabSender
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5762402043307469196, guid: ce2573bfb0528834bbb45e246dd4936f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -59830,7 +59831,7 @@ MonoBehaviour:
   channelFormat: 1
   streamName: unity_lsl_my_stream_name
   streamType: LSL
-  channelNum: 10
+  channelNum: 11
   nominalSamplingRate: 100
   start_time: 0
   sent_samples: 0
@@ -118496,6 +118497,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b9a5ca63cff9294e802248c3bf5a34d, type: 3}
+--- !u!1 &1843817242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1843817244}
+  - component: {fileID: 1843817243}
+  m_Layer: 0
+  m_Name: GamesController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1843817243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843817242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57870f0bc61a6bf4490c3d3c9f15c498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1843817244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843817242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -97.67268, y: -3.3, z: 89.15909}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1845439814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141365,3 +141410,4 @@ SceneRoots:
   - {fileID: 1819238593}
   - {fileID: 692981757}
   - {fileID: 87258668}
+  - {fileID: 1843817244}

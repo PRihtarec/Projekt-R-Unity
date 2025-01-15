@@ -11,19 +11,19 @@ public class PlayerCam : MonoBehaviour
 
     float xRotation;
     float yRotation;
-    MinigameStart minigame;
+    GamesController gamesController;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        minigame = FindObjectOfType<MinigameStart>();
+        gamesController = FindObjectOfType<GamesController>();
     }
 
     private void Update()
     {
-        if (!minigame.isGameStarted()){
+        if (!gamesController.isMinigameInProgress()){
         // get mouse input
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensY;

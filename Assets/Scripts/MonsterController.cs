@@ -17,6 +17,7 @@ public class MonsterController : MonoBehaviour
     public bool interrupt;
 
     private Coroutine sniffCoroutine; 
+    private Camera mainCamera;
 
     void Start()
     {
@@ -185,5 +186,21 @@ private void InterruptSniffAndAttack()
 
   
     aggro = true;
+}
+public float getPlayerDistance(){
+    return Vector3.Distance(transform.position, player.transform.position);
+}
+public bool isPlayerInSafeRoom(){
+    return player.transform.position.x>=-83 && player.transform.position.x<-76 && player.transform.position.z>=-1 && player.transform.position.z<=10;
+}
+public bool isInViewOfPlayer(){
+    Vector3 viewportPos = mainCamera.WorldToViewportPoint(gameObject.transform.position);
+
+        // Check if the object is in the camera's viewport
+        return viewportPos.z > 0 && 
+                        viewportPos.x > 0 && viewportPos.x < 1 && 
+                        viewportPos.y > 0 && viewportPos.y < 1;
+
+     
 }
 }

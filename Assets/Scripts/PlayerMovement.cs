@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     [HideInInspector] public TextMeshProUGUI text_speed;
-    MinigameStart minigame;
+    GamesController gamesController;
 
     private void Start()
     {
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
-        minigame = FindObjectOfType<MinigameStart>();
+        gamesController = FindObjectOfType<GamesController>();
 
         walkSpeed = moveSpeed; 
         sprintSpeed = moveSpeed * 1.5f; 
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!minigame.isGameStarted()){
+        if (!gamesController.isMinigameInProgress()){
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         
@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!minigame.isGameStarted()){
+        if (!gamesController.isMinigameInProgress()){
         MovePlayer();
         }
     }
