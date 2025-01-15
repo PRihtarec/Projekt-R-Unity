@@ -25,4 +25,7 @@ public class Flashlight : MonoBehaviour
             }
         }
     }
+    public bool isFlashlightActive(){
+        return flashlightActive;
+    }
 }
