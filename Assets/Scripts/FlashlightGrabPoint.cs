@@ -24,14 +24,13 @@ public class FlashlightGrabPoint : MonoBehaviour
             Vector3 newPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, Time.deltaTime * lerpSpeed);
             transform.position = newPosition;
 
-            // Dobivanje ciljne rotacije (samo za rotaciju oko Y osovine)
+            //dobivanje ciljne rotacije (samo za rotaciju oko Y osovine)
         Quaternion targetRotation = objectGrabPointTransform.rotation;
 
-        // Postavljanje rotacije tako da X os bude okrenuta prema naprijed
+        //postavljanje rotacije tako da X os bude okrenuta prema naprijed
         Vector3 forwardDirection = objectGrabPointTransform.forward; // usmjerenje prema naprijed
         Quaternion targetRotationWithForward = Quaternion.LookRotation(forwardDirection, objectGrabPointTransform.up);
 
-        // Primjena rotacije uz interpolaciju
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationWithForward, Time.deltaTime * lerpSpeed);
         Flashlight.SetActive(true);
         Destroy(gameObject);

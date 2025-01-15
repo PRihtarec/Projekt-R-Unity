@@ -15,6 +15,21 @@ public class PlayerPickupDrop : MonoBehaviour
     private objectGrabbable objectGrabbable;
     private FlashlightGrabPoint flashlightGrabbable;
 
+    private Flashlight flashlight; //skripta da onemogucim F ako flashlight nije u ruci
+    private void Start(){
+        flashlight = GetComponent<Flashlight>();
+        
+        if (flashlight != null)
+        {
+            // Disable the script initially
+            flashlight.enabled = false;
+            Debug.Log("flashlight Script has been disabled.");
+        }
+        else
+        {
+            Debug.LogError("flashlight Script is not attached to this GameObject.");
+        }
+        }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E)){
             if (objectGrabbable == null){ //pokusavamo uzeti
@@ -24,8 +39,10 @@ public class PlayerPickupDrop : MonoBehaviour
                         objectGrabbable.Grab(objectGrabPointTransform); //postavljanje objekta u lijevu ruku
                         Debug.Log(objectGrabbable);
                     }
-                    if(raycastHit.transform.TryGetComponent(out flashlightGrabbable)){
+                    else if(raycastHit.transform.TryGetComponent(out flashlightGrabbable)){
                         flashlightGrabbable.Grab(FlashlightLocation); //postavljanje objekta u desnu ruku
+                        flashlight.enabled=true;
+                        Debug.Log("Flashlight in hand!");
                         Debug.Log(flashlightGrabbable);
                     }
            }
