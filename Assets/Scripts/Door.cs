@@ -12,7 +12,15 @@ public class Door : MonoBehaviour
         toggle=false;
         dooranimation.ResetTrigger("open");
         dooranimation.SetTrigger("close");
-        
+    
+    
+    }
+    public void open() {
+        toggle=false;
+        dooranimation.ResetTrigger("close");
+        dooranimation.SetTrigger("open");
+    
+    
     }
     public void openClose(){
         toggle = !toggle;
