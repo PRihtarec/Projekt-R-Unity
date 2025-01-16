@@ -9,6 +9,7 @@ public class PlayerPickupDrop : MonoBehaviour
     [SerializeField] private Transform objectGrabPointTransform;
     [SerializeField] private LayerMask pickUpLayerMask;
     [SerializeField] private LayerMask minigameLayerMask;
+     [SerializeField] private LayerMask lightswitchLayerMask;
     [SerializeField] private float pickUpRange=2f;
 
     [SerializeField] private Transform FlashlightLocation; //desna ruka
@@ -75,6 +76,17 @@ public class PlayerPickupDrop : MonoBehaviour
 
                 
             }
+            if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit3, pickUpRange))
+        {
+            Debug.Log("Hit lightswitch: " + raycastHit3.transform.name);
+
+            // Provjerite ima li objekt komponentu za upravljanje svjetlima
+            if (raycastHit3.transform.TryGetComponent(out LightSwitch lightSwitch))
+            {
+                lightSwitch.ToggleLights(); // Aktivirajte funkciju za paljenje/gašenje svjetla
+                Debug.Log("Lights toggled.");
+            }
+        }
         }
     }
 }
