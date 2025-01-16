@@ -14,18 +14,20 @@ public class AggroController : MonoBehaviour
     float walkingRange = 2f;
     float sprintingRange = 5f;
 
-    private GameObject flashlight;
-    private Light flashlightLight;
+    public GameObject flashlight;
+    public Light flashlightLight;
     private float flashlightRange = 10f;
+    private Flashlight flashlightScript;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("player");
         Player = GameObject.FindGameObjectWithTag("Player");
         monsterController = gameObject.GetComponent<MonsterController>();
         playerMovement = Player.GetComponent<PlayerMovement>();
-        flashlight = GameObject.FindGameObjectWithTag("flashlight");
-        flashlightLight = flashlightLight.GetComponent<Light>();
+       // flashlight = GameObject.FindGameObjectWithTag("flashlight");
+        flashlightLight = flashlight.GetComponent<Light>();
         flashlightRange = flashlightLight.range;
+        flashlightScript = Player.GetComponent<Flashlight>();
     }
 
     // Update is called once per frame
@@ -60,7 +62,9 @@ public class AggroController : MonoBehaviour
     public bool CheckMonsterFlashlight(){
         Vector3 directionToTarget = gameObject.transform.position - flashlight.transform.position;
         float distanceToTarget = directionToTarget.magnitude;
-
+        if (!flashlightScript.isFlashlightActive()){
+            return false;
+        }
         if (distanceToTarget <= flashlightRange)
         {
             directionToTarget.Normalize();
@@ -69,10 +73,12 @@ public class AggroController : MonoBehaviour
             float angleToTarget = Vector3.Angle(flashlight.transform.forward, directionToTarget);
             if (angleToTarget <= flashlightLight.spotAngle / 2)
             {
+                UnityEngine.Debug.Log("proso angle check");
                 // Perform a raycast to confirm no obstruction
                 if (Physics.Raycast(flashlight.transform.position, directionToTarget, out RaycastHit hit, flashlightRange))
                 {
-                    return hit.transform == gameObject.transform;
+                    UnityEngine.Debug.Log($"hitalo je {hit.collider}");
+                    return hit.transform.position.x == gameObject.transform.position.x && hit.transform.position.z == gameObject.transform.position.z;
                     
                 }
             }
