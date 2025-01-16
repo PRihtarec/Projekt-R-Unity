@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class MonsterController : MonoBehaviour
+public class MonsterControllerHallway : MonoBehaviour
 {
     private GameObject player;
-    private NavMeshAgent agent;
+    private UnityEngine.AI.NavMeshAgent agent;
     private Animator animator;
     private Animator animator2;
     GameObject[] destinations;
@@ -22,7 +21,7 @@ public class MonsterController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("player");
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Transform childTransform = transform.Find("Creep_mesh");
         Transform childTransform2 = transform.Find("Creep_mesh_lod1");
         animator = childTransform.GetComponent<Animator>();
@@ -36,6 +35,7 @@ public class MonsterController : MonoBehaviour
         animator.SetBool("isWalking", true);
         animator2.SetBool("isWalking", true);
         agent.speed = 2;
+        setAggro(true);
         GotoNextPoint();
     }
 
@@ -89,7 +89,7 @@ public void setAggro(bool ifAggro)
 
     if (aggro)
     {
-        agent.speed = 4;
+        agent.speed = 5;
         animator.SetBool("isWalking", false);
         animator2.SetBool("isWalking", false);
         animator.SetBool("isRunning", true);
@@ -114,7 +114,7 @@ private IEnumerator PerformRoarBeforeAggro()
     animator2.SetTrigger("Roar");
 
   
-    yield return new WaitForSeconds(4.5f);
+    yield return new WaitForSeconds(4f);
 
    
     agent.isStopped = false;
