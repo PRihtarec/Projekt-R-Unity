@@ -5,6 +5,13 @@ using UnityEngine.AI;
 
 public class MonsterController : MonoBehaviour
 {
+    public AudioSource sniffSource;
+    public AudioSource roarSource;
+    public AudioSource muzikaSource;
+    public AudioSource chaseMuzikaSource;
+    public AudioSource hodanjeSource;
+    public AudioSource brzoHodanjeSource;
+
     private GameObject player;
     private NavMeshAgent agent;
     private Animator animator;
@@ -21,6 +28,7 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
+        hodanjeSource.Play();
         player = GameObject.FindGameObjectWithTag("player");
         agent = GetComponent<NavMeshAgent>();
         Transform childTransform = transform.Find("Creep_mesh");
@@ -94,6 +102,10 @@ public void setAggro(bool ifAggro)
         animator2.SetBool("isWalking", false);
         animator.SetBool("isRunning", true);
         animator2.SetBool("isRunning", true);
+        hodanjeSource.Pause();
+        brzoHodanjeSource.Play();
+        muzikaSource.Pause();
+        chaseMuzikaSource.Play();
     }
     else
     {
@@ -102,6 +114,11 @@ public void setAggro(bool ifAggro)
         animator2.SetBool("isRunning", false);
         animator.SetBool("isWalking", true);
         animator2.SetBool("isWalking", true);
+        brzoHodanjeSource.Pause();
+        hodanjeSource.Play();
+        chaseMuzikaSource.Pause();
+        muzikaSource.Play();
+
     }
 }
 private IEnumerator PerformRoarBeforeAggro()
@@ -112,6 +129,7 @@ private IEnumerator PerformRoarBeforeAggro()
 
     animator.SetTrigger("Roar");
     animator2.SetTrigger("Roar");
+    roarSource.Play();
 
   
     yield return new WaitForSeconds(4.5f);
@@ -137,6 +155,7 @@ private IEnumerator PerformRoarBeforeAggro()
         animator2.SetBool("isWalking", false);
         animator.SetTrigger("Sniff");
         animator2.SetTrigger("Sniff");
+        sniffSource.Play();
 
         hasSniffed = true;
 

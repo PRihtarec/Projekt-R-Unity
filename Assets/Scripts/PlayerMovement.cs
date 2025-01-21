@@ -5,6 +5,11 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioSource hodanjeSource;
+    public AudioSource brzoHodanjeSource;
+
+
     [Header("Movement")]
     public float moveSpeed;
 
@@ -84,6 +89,19 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+        bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+
+        if(!isMoving)
+        {
+            if (hodanjeSource.isPlaying)
+            {
+                hodanjeSource.Stop();
+            }
+            if (brzoHodanjeSource.isPlaying)
+            {
+                brzoHodanjeSource.Stop();
+            }
+        }
 
         // when to jump
         if(Input.GetKey(jumpKey) && readyToJump && grounded)
@@ -98,10 +116,26 @@ public class PlayerMovement : MonoBehaviour
         // Check if sprinting
         if (Input.GetKey(sprintKey) && !Input.GetKey(KeyCode.LeftControl))
         {
+            if (!brzoHodanjeSource.isPlaying)
+            {
+                brzoHodanjeSource.Play();
+            }
+            if (hodanjeSource.isPlaying)
+            {
+                hodanjeSource.Stop();
+            }
             moveSpeed = sprintSpeed;
         }
         else
         {
+            if (!hodanjeSource.isPlaying)
+            {
+                hodanjeSource.Play();
+            }
+            if (brzoHodanjeSource.isPlaying)
+            {
+                brzoHodanjeSource.Stop();
+            }
             moveSpeed = walkSpeed;
         }
         if (Input.GetKey(KeyCode.LeftControl))
