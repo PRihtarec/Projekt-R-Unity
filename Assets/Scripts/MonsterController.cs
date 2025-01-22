@@ -20,14 +20,15 @@ public class MonsterController : MonoBehaviour
     private bool aggro;
     private int destinationIndex;
     private bool hasSniffed;
-    public float playerDetectionRange = 5f;
+    public float sniffDetectionRange = 5f;
     public bool interrupt;
-
-    private Coroutine sniffCoroutine; 
+    private AggroController aggroController;
+    private Coroutine sniffCoroutine;
     public Camera mainCamera;
 
     void Start()
     {
+        aggroController = gameObject.GetComponent<AggroController>();
         hodanjeSource.Play();
         player = GameObject.FindGameObjectWithTag("player");
         agent = GetComponent<NavMeshAgent>();
@@ -62,7 +63,7 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-     
+
         if (aggro && sniffCoroutine != null)
         {
             InterruptSniffAndAttack();
@@ -73,8 +74,11 @@ public class MonsterController : MonoBehaviour
     {
         if (destinations.Length == 0)
             return;
+        GameObject destinationRoom = destinations[destinationIndex];
+        int finalDestinationIndex = Random.Range(0, destinationRoom.transform.childCount);
+        Transform finalDestination = destinationRoom.transform.GetChild(finalDestinationIndex);
 
-        agent.destination = destinations[destinationIndex].transform.position;
+        agent.destination = finalDestination.position;
 
         int newDestinationIndex = Random.Range(0, destinations.Length);
         while (destinationIndex == newDestinationIndex)
@@ -85,63 +89,63 @@ public class MonsterController : MonoBehaviour
         hasSniffed = false;
     }
 
-public void setAggro(bool ifAggro)
-{
-   
-    if (ifAggro && !aggro)
+    public void setAggro(bool ifAggro)
     {
-        StartCoroutine(PerformRoarBeforeAggro());
+
+        if (ifAggro && !aggro)
+        {
+            StartCoroutine(PerformRoarBeforeAggro());
+        }
+
+        aggro = ifAggro;
+
+        if (aggro)
+        {
+            agent.speed = 4;
+            animator.SetBool("isWalking", false);
+            animator2.SetBool("isWalking", false);
+            animator.SetBool("isRunning", true);
+            animator2.SetBool("isRunning", true);
+            hodanjeSource.Pause();
+            brzoHodanjeSource.Play();
+            muzikaSource.Pause();
+            chaseMuzikaSource.Play();
+        }
+        else
+        {
+            agent.speed = 2;
+            animator.SetBool("isRunning", false);
+            animator2.SetBool("isRunning", false);
+            animator.SetBool("isWalking", true);
+            animator2.SetBool("isWalking", true);
+            brzoHodanjeSource.Pause();
+            hodanjeSource.Play();
+            chaseMuzikaSource.Pause();
+            muzikaSource.Play();
+
+        }
     }
-
-    aggro = ifAggro;
-
-    if (aggro)
+    private IEnumerator PerformRoarBeforeAggro()
     {
-        agent.speed = 4;
-        animator.SetBool("isWalking", false);
-        animator2.SetBool("isWalking", false);
-        animator.SetBool("isRunning", true);
-        animator2.SetBool("isRunning", true);
-        hodanjeSource.Pause();
-        brzoHodanjeSource.Play();
-        muzikaSource.Pause();
-        chaseMuzikaSource.Play();
+
+        agent.isStopped = true;
+
+
+        animator.SetTrigger("Roar");
+        animator2.SetTrigger("Roar");
+        roarSource.Play();
+
+
+        yield return new WaitForSeconds(4.5f);
+
+
+        agent.isStopped = false;
+
+        if (aggro)
+        {
+            agent.SetDestination(player.transform.position);
+        }
     }
-    else
-    {
-        agent.speed = 2;
-        animator.SetBool("isRunning", false);
-        animator2.SetBool("isRunning", false);
-        animator.SetBool("isWalking", true);
-        animator2.SetBool("isWalking", true);
-        brzoHodanjeSource.Pause();
-        hodanjeSource.Play();
-        chaseMuzikaSource.Pause();
-        muzikaSource.Play();
-
-    }
-}
-private IEnumerator PerformRoarBeforeAggro()
-{
-
-    agent.isStopped = true;
-
-
-    animator.SetTrigger("Roar");
-    animator2.SetTrigger("Roar");
-    roarSource.Play();
-
-  
-    yield return new WaitForSeconds(4.5f);
-
-   
-    agent.isStopped = false;
-
-    if (aggro)
-    {
-        agent.SetDestination(player.transform.position);
-    }
-}
     public bool getAggro()
     {
         return aggro;
@@ -159,22 +163,26 @@ private IEnumerator PerformRoarBeforeAggro()
 
         hasSniffed = true;
 
-      
+
         sniffCoroutine = StartCoroutine(WaitForSniffAndCheckPlayer());
     }
 
     private IEnumerator WaitForSniffAndCheckPlayer()
     {
-        yield return new WaitForSeconds(4.5f); 
+        yield return new WaitForSeconds(4.5f);
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        if (distanceToPlayer <= playerDetectionRange)
+        if (distanceToPlayer <= sniffDetectionRange && !aggroController.IsWallBetween(player, gameObject))
         {
-            animator.SetTrigger("Roar");
-            animator2.SetTrigger("Roar");
-            setAggro(true);
-
-            yield return new WaitForSeconds(4.5f); 
+            float aggroChance = (sniffDetectionRange - distanceToPlayer) / sniffDetectionRange * 100;
+            float randomValue = Random.Range(0f, 100f);
+            if (randomValue < aggroChance)
+            {
+                animator.SetTrigger("Roar");
+                animator2.SetTrigger("Roar");
+                setAggro(true);
+            }
+            yield return new WaitForSeconds(4.5f);
         }
 
         agent.isStopped = false;
@@ -188,43 +196,47 @@ private IEnumerator PerformRoarBeforeAggro()
         }
     }
 
-private void InterruptSniffAndAttack()
-{
-   
-    if (sniffCoroutine != null)
+    private void InterruptSniffAndAttack()
     {
-        StopCoroutine(sniffCoroutine);
-        sniffCoroutine = null;
+
+        if (sniffCoroutine != null)
+        {
+            StopCoroutine(sniffCoroutine);
+            sniffCoroutine = null;
+        }
+
+
+        animator.ResetTrigger("Sniff");
+        animator2.ResetTrigger("Sniff");
+
+
+        StartCoroutine(PerformRoarBeforeAggro());
+
+
+        aggro = true;
     }
-
-   
-    animator.ResetTrigger("Sniff");
-    animator2.ResetTrigger("Sniff");
-
-   
-    StartCoroutine(PerformRoarBeforeAggro());
-
-  
-    aggro = true;
-}
-public float getPlayerDistance(){
-    return Vector3.Distance(transform.position, player.transform.position);
-}
-public bool isPlayerInSafeRoom(){
-    bool safe = player.transform.position.x>=-83 && player.transform.position.x<-76 && player.transform.position.z>=-1 && player.transform.position.z<=10;
-    if (safe){
-        setAggro(false);
+    public float getPlayerDistance()
+    {
+        return Vector3.Distance(transform.position, player.transform.position);
     }
-    return safe;
-}
-public bool isInViewOfPlayer(){
-    Vector3 viewportPos = mainCamera.WorldToViewportPoint(gameObject.transform.position);
+    public bool isPlayerInSafeRoom()
+    {
+        bool safe = player.transform.position.x >= -83 && player.transform.position.x < -76 && player.transform.position.z >= -1 && player.transform.position.z <= 10;
+        if (safe)
+        {
+            setAggro(false);
+        }
+        return safe;
+    }
+    public bool isInViewOfPlayer()
+    {
+        Vector3 viewportPos = mainCamera.WorldToViewportPoint(gameObject.transform.position);
 
         // Check if the object is in the camera's viewport
-        return viewportPos.z > 0 && 
-                        viewportPos.x > 0 && viewportPos.x < 1 && 
+        return viewportPos.z > 0 &&
+                        viewportPos.x > 0 && viewportPos.x < 1 &&
                         viewportPos.y > 0 && viewportPos.y < 1;
 
-     
-}
+
+    }
 }

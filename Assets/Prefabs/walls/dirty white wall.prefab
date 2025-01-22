@@ -1071,7 +1071,7 @@ GameObject:
   - component: {fileID: 6851603379205958185}
   m_Layer: 0
   m_Name: dirty white wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
