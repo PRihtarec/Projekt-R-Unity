@@ -39,7 +39,7 @@ public class MinigameStart : MonoBehaviour
         for (int i = 0; i < rotations.Length; i++)
         {
 
-            SpawnUIObject(-0.4f, 0.3f, rotations[i], i, true);
+            SpawnUIObject(-0.4f, 0.0f, rotations[i], i, true);
         }
         
     }
@@ -97,7 +97,7 @@ public class MinigameStart : MonoBehaviour
                 || Input.GetKeyDown(KeyCode.A) && rotations[currentArrow] == 90)
                 {
                     Destroy(arrows[currentArrow]);
-                    SpawnUIObject(-0.4f, 0.3f, rotations[currentArrow], currentArrow, false);
+                    SpawnUIObject(-0.4f, 0.0f, rotations[currentArrow], currentArrow, false);
                     currentArrow++;       
                     if (currentArrow==rotations.Length){
                         MinigameSuccess();
