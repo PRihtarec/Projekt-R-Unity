@@ -10,10 +10,10 @@ public class AggroController : MonoBehaviour
     private MonsterController monsterController;
     private PlayerMovement playerMovement;
     float distanceToPlayer;
-    float crouchingRange = 1f;
-    float walkingRange = 2f;
-    float sprintingRange = 5f;
-    private float wallRangeMultiplier = 0.3f;
+    public float crouchingRange = 1f;
+    public float walkingRange = 2f;
+    public float sprintingRange = 5f;
+    public float wallRangeMultiplier = 0.3f;
 
     public GameObject flashlight;
     public Light flashlightLight;

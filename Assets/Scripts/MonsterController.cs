@@ -25,6 +25,9 @@ public class MonsterController : MonoBehaviour
     private AggroController aggroController;
     private Coroutine sniffCoroutine;
     public Camera mainCamera;
+    public float walkingSpeed = 2f;
+    public float runningSpeed = 4f;
+
 
     void Start()
     {
@@ -101,7 +104,7 @@ public class MonsterController : MonoBehaviour
 
         if (aggro)
         {
-            agent.speed = 4;
+            agent.speed = runningSpeed;
             animator.SetBool("isWalking", false);
             animator2.SetBool("isWalking", false);
             animator.SetBool("isRunning", true);
@@ -113,7 +116,7 @@ public class MonsterController : MonoBehaviour
         }
         else
         {
-            agent.speed = 2;
+            agent.speed = walkingSpeed;
             animator.SetBool("isRunning", false);
             animator2.SetBool("isRunning", false);
             animator.SetBool("isWalking", true);

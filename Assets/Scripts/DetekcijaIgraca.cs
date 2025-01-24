@@ -10,7 +10,7 @@ public class DetekcijaIgraca : MonoBehaviour
     if (PlayerTrigger.CompareTag("player"))
         {
             
-            Destroy(PlayerTrigger.transform.root.gameObject); //Ubija igrača i to cijeli folder s kamerom
+           // Destroy(PlayerTrigger.transform.root.gameObject); //Ubija igrača i to cijeli folder s kamerom
             Debug.Log("Ubilo te!");
             
         }
