@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PolugaScript : MonoBehaviour
@@ -10,6 +11,29 @@ public class PolugaScript : MonoBehaviour
     private string activateTrigger = "electricityOn";  //trigeri za animacije
     private string deactivateTrigger = "electricityOff";
 
+    private string lightObjectName = "EndGameLights"; //ime prefab taga svijetla koje koristim
+
+    private List<Animator> lightAnimators = new();
+
+    void Start()
+    {
+        //ucitavanje svih animatora svijetla
+        GameObject[] lights = GameObject.FindGameObjectsWithTag(lightObjectName);
+
+        foreach (GameObject light in lights)
+        {
+            Animator lightAnimator = light.GetComponent<Animator>();
+            if (lightAnimator != null)
+            {
+                lightAnimators.Add(lightAnimator);
+            }
+            else
+            {
+                Debug.LogWarning("Animator nije pronađen na objektu: " + light.name);
+            }
+        }
+    }
+
     public void ActivateTrigger()
     {
         if (!isClickable)
@@ -19,8 +43,12 @@ public class PolugaScript : MonoBehaviour
         }
 
         animator.SetTrigger(activateTrigger);
+        foreach (Animator lightAnimator in lightAnimators)
+        {
+            lightAnimator.SetTrigger(activateTrigger);
+        }
 
-        Debug.Log("Trigger activated!");
+        Debug.Log($"Poluga aktivirana. Cooldown vrijeme: {cooldownTime} sekundi.");
 
         isClickable = false;
 
@@ -36,7 +64,11 @@ public class PolugaScript : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger(deactivateTrigger);
-            Debug.Log("Poluga opet ne radi");
+            foreach (Animator lightAnimator in lightAnimators)
+            {
+                lightAnimator.SetTrigger(deactivateTrigger);
+            }
+            Debug.Log("Poluga opet spuštena");
         }
     }
 

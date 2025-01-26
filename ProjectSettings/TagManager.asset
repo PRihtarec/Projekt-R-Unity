@@ -12,6 +12,7 @@ TagManager:
   - monster
   - flashlight
   - Key
+  - EndGameLights
   layers:
   - Default
   - TransparentFX
