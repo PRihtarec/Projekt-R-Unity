@@ -9,7 +9,8 @@ public class PlayerPickupDrop : MonoBehaviour
     [SerializeField] private Transform objectGrabPointTransform;
     [SerializeField] private LayerMask pickUpLayerMask;
     [SerializeField] private LayerMask minigameLayerMask;
-     [SerializeField] private LayerMask lightswitchLayerMask;
+    [SerializeField] private LayerMask lightswitchLayerMask;
+    [SerializeField] private LayerMask polugaLayerMask;
     [SerializeField] private float pickUpRange=2f;
 
     [SerializeField] private Transform FlashlightLocation; //desna ruka
@@ -76,7 +77,21 @@ public class PlayerPickupDrop : MonoBehaviour
 
                 
             }
-            if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit3, pickUpRange))
+            if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit4, pickUpRange, polugaLayerMask))
+        {
+            Debug.Log("Hit Poluga " + raycastHit4.transform.name);
+
+            if (raycastHit4.transform.TryGetComponent(out PolugaScript polugaScript))
+                {
+                polugaScript.ActivateTrigger(); //akivacija funkcije skripte na trigeru
+                Debug.Log("Poluga activated.");
+                }
+            else
+                {
+                Debug.LogWarning("PolugaScript not found on hit object.");
+                }
+        }
+            else if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit3, pickUpRange))
         {
             Debug.Log("Hit lightswitch: " + raycastHit3.transform.name);
 
@@ -87,6 +102,7 @@ public class PlayerPickupDrop : MonoBehaviour
                 Debug.Log("Lights toggled.");
             }
         }
+            
         }
     }
 }
