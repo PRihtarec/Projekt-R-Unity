@@ -15,6 +15,12 @@ public class PlayerCam : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.HasKey("mouseSensitivity"))
+        {
+            float mouse= PlayerPrefs.GetFloat("mouseSensitivity");
+            sensX=mouse+0.5f;
+            sensY=mouse+0.5f;
+        }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
