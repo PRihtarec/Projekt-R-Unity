@@ -12,6 +12,7 @@ TagManager:
   - monster
   - flashlight
   - Key
+  - EndGameLights
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Minigame
   - Flashlight
   - LightSwitch
-  - 
+  - PolugaLayer
   - 
   - 
   - 
