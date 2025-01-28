@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterTriggerHallway : MonoBehaviour
 {
     [SerializeField] private GameObject monster;
-    private MonsterController monsterController;
+    private MonsterControllerHallway monsterController;
     [SerializeField] private Animator lights24;
     [SerializeField] private Animator lights3;
 
@@ -29,10 +29,17 @@ public class MonsterTriggerHallway : MonoBehaviour
                 {
                 monster.SetActive(true); // Activate the monster
                 }
+                /*
+                monsterController = monster.GetComponent<MonsterControllerHallway>();
 
-                monsterController = monster.GetComponent<MonsterController>();
-
-                monsterController.setAggro(true); // Immediately set aggro
+                if (monsterController != null)
+                {
+                monsterController.setAggro(true); // Set aggro
+                }
+                else
+                {
+                   Debug.LogError("MonsterControllerHallway nije pronađen na objektu 'monster'. Provjeri da li je komponenta dodana.");
+                }*/
             
             }
     }

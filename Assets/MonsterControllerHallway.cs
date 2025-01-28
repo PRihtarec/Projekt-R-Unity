@@ -15,6 +15,10 @@ public class MonsterControllerHallway : MonoBehaviour
     public float playerDetectionRange = 5f;
     public bool interrupt;
 
+    [SerializeField] private Transform childTransform;
+    [SerializeField] private Transform childTransform2;
+
+
     private Coroutine sniffCoroutine; 
     public Camera mainCamera;
 
@@ -22,8 +26,6 @@ public class MonsterControllerHallway : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("player");
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        Transform childTransform = transform.Find("Creep_mesh");
-        Transform childTransform2 = transform.Find("Creep_mesh_lod1");
         animator = childTransform.GetComponent<Animator>();
         animator2 = childTransform2.GetComponent<Animator>();
         destinations = GameObject.FindGameObjectsWithTag("destination");

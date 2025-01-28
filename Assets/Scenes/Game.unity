@@ -2781,6 +2781,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!4 &35363168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6362000857070324093, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+  m_PrefabInstance: {fileID: 1538622199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &35590233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78987,6 +78992,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!4 &1165505368 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6362000856439192673, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+  m_PrefabInstance: {fileID: 1538622199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1166059406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 99c079541e57ab042b54c9607050eb24, type: 3}
@@ -112566,6 +112576,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetectionRange: 10
   interrupt: 0
+  childTransform: {fileID: 1165505368}
+  childTransform2: {fileID: 35363168}
   mainCamera: {fileID: 0}
 --- !u!4 &1539318391 stripped
 Transform:
