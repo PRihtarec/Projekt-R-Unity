@@ -23,11 +23,11 @@ public class Options : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("mouseSensitivity"))
         {
-            volumeSlider.value=PlayerPrefs.GetFloat("mouseSensitivity");
+            mouseSlider.value=PlayerPrefs.GetFloat("mouseSensitivity");
         }
         else
         {
-            volumeSlider.value=0.5f;
+            mouseSlider.value=0.5f;
         }
     }
     public void Back(){

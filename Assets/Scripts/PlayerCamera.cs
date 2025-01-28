@@ -31,7 +31,7 @@ public class PlayerCam : MonoBehaviour
         else
         {
             sensX=1f;
-            sensX=1f;
+            sensY=1f;
         }
         if (!gamesController.isMinigameInProgress()){
         // get mouse input
