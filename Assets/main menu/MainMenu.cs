@@ -55,15 +55,12 @@ public class mainMenu : MonoBehaviour
         tockica.SetActive(false);
         foreach (var audioSource in allAudioSources)
         {
-            if (audioSource.mute==true)
+            if (audioSource.isPlaying)
             {
-                audioSource.mute=false;
-            }
-            else
-            {
-                audioSource.mute=true;
+                audioSource.Pause();
             }
         }
+        mainMenuSource.Play();
         isPaused=true;
     }
     public void ResumeGame(){
@@ -75,16 +72,13 @@ public class mainMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         Canvas.ForceUpdateCanvases();
         tockica.SetActive(true);
+        mainMenuSource.Stop();
 
         foreach (var audioSource in allAudioSources)
         {
-            if (audioSource.mute==false)
+            if (audioSource!=mainMenuSource)
             {
-                audioSource.mute=true;
-            }
-            else
-            {
-                audioSource.mute=false;
+                audioSource.UnPause();
             }
         }
         isPaused=false;
