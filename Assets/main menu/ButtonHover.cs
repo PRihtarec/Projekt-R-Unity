@@ -1,61 +1,75 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using TMPro;
+using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ButtonHoverTMP : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
+public class TextFlicker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public TMP_Text buttonText; // Reference to the TextMeshPro component
-    private Color originalColor; // To store the original text color
-    private bool isSelected = false; // Tracks whether the button is selected
+    public CanvasGroup canvasGroup;
+    public float fadeInTime = 1f; // Time to fade in
+    public float fadeOutTime = 1f; // Time to fade out
+    public float flickerSpeed = 0.5f; // Time between each fade cycle
+    private bool isHovered = false; // Track if the mouse is hovering over the text
+    private bool shouldFade = true; // Flag to control whether fading should happen
+    private float targetAlpha = 1f; // The target alpha value for fading
 
-    void Start()
+    private void Start()
     {
-        if (buttonText == null)
-        {
-            buttonText = GetComponentInChildren<TMP_Text>();
-        }
+        if (canvasGroup == null)
+            canvasGroup = GetComponent<CanvasGroup>();
 
-        if (buttonText != null)
+        StartCoroutine(FlickerText());
+    }
+
+    private IEnumerator FlickerText()
+    {
+        while (true)
         {
-            originalColor = buttonText.color;
+            if (!isHovered && shouldFade)
+            {
+                // Fade In
+                float t = 0;
+                while (t < fadeInTime && !isHovered)
+                {
+                    t += Time.deltaTime;
+                    canvasGroup.alpha = Mathf.Lerp(0.3f, 1, t / fadeInTime);
+                    yield return null;
+                }
+
+                // Fade Out
+                t = 0;
+                while (t < fadeOutTime && !isHovered)
+                {
+                    t += Time.deltaTime;
+                    canvasGroup.alpha = Mathf.Lerp(1, 0.3f, t / fadeOutTime);
+                    yield return null;
+                }
+
+                // Wait for the next cycle
+                yield return new WaitForSeconds(flickerSpeed);
+            }
+            else
+            {
+                // If hovered, immediately set the opacity to 1
+                canvasGroup.alpha = 1;
+                yield return null; // Skip fading effect while hovered
+            }
         }
     }
 
+    // IPointerEnterHandler: Triggered when mouse enters the text area
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (buttonText != null && !isSelected)
-        {
-            Color hoverColor = originalColor;
-            hoverColor.a = 1f; // Fully opaque
-            buttonText.color = hoverColor;
-        }
+        isHovered = true; // Set hovered state to true
+        shouldFade = false; // Stop fading when hovered
+        canvasGroup.alpha = 1; // Set opacity to 1 immediately
     }
 
+    // IPointerExitHandler: Triggered when mouse exits the text area
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (buttonText != null && !isSelected)
-        {
-            buttonText.color = originalColor;
-        }
-    }
-
-    public void OnSelect(BaseEventData eventData)
-    {
-        if (buttonText != null)
-        {
-            isSelected = true;
-            Color selectedColor = originalColor;
-            selectedColor.a = 1f; // Fully opaque
-            buttonText.color = selectedColor;
-        }
-    }
-
-    public void OnDeselect(BaseEventData eventData)
-    {
-        if (buttonText != null)
-        {
-            isSelected = false;
-            buttonText.color = originalColor;
-        }
+        isHovered = false; // Set hovered state to false
+        shouldFade = true; // Resume fading after hover
     }
 }
