@@ -23,6 +23,16 @@ public class PlayerCam : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerPrefs.HasKey("mouseSensitivity"))
+        {
+            sensX=PlayerPrefs.GetFloat("mouseSensitivity")+0.5f;
+            sensY=PlayerPrefs.GetFloat("mouseSensitivity")+0.5f;
+        }
+        else
+        {
+            sensX=1f;
+            sensX=1f;
+        }
         if (!gamesController.isMinigameInProgress()){
         // get mouse input
         float mouseX = Input.GetAxis("Mouse X") *  sensX;

@@ -41,6 +41,7 @@ public class Options : MonoBehaviour
         mixer.SetFloat("music", Mathf.Log10(volume)*20);
         PlayerPrefs.SetFloat("musicVolume", volume);
         PlayerPrefs.Save();
+        LoadVolume();
     }
 
     public void LoadVolume(){
@@ -52,6 +53,7 @@ public class Options : MonoBehaviour
         float mouse= mouseSlider.value;
         PlayerPrefs.SetFloat("mouseSensitivity", mouse);
         PlayerPrefs.Save();
+        mouseSlider.value = PlayerPrefs.GetFloat("mouseSensitivity"); 
     }
     public void LoadMouse(){
         mouseSlider.value=PlayerPrefs.GetFloat("mouseSensitivity");

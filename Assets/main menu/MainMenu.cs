@@ -12,7 +12,9 @@ public class mainMenu : MonoBehaviour
     public AudioSource mainMenuSource;
     private AudioSource[] allAudioSources; 
     public GameObject tockica;
+    private bool isPaused;
     void Start(){
+        isPaused=false;
         allAudioSources = FindObjectsOfType<AudioSource>();
         if (PlayerPrefs.HasKey("musicVolume"))
         {
@@ -24,8 +26,45 @@ public class mainMenu : MonoBehaviour
         }
     
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame(); 
+            }
+        }
+    }
     public void PlayGame(){
         SceneManager.LoadScene("Game");
+    }
+    void PauseGame()
+    {
+        Time.timeScale = 0;                
+        cameraScript.enabled = false;        
+        Cursor.lockState = CursorLockMode.None;   
+        Cursor.visible = true;                
+        mainMenuPanel.SetActive(true); 
+        optionsPanel.SetActive(false);
+        Canvas.ForceUpdateCanvases();
+        tockica.SetActive(false);
+        foreach (var audioSource in allAudioSources)
+        {
+            if (audioSource.mute==true)
+            {
+                audioSource.mute=false;
+            }
+            else
+            {
+                audioSource.mute=true;
+            }
+        }
+        isPaused=true;
     }
     public void ResumeGame(){
         Time.timeScale = 1;        
@@ -33,17 +72,22 @@ public class mainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;     
         Cursor.visible = false;                      
         mainMenuPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         Canvas.ForceUpdateCanvases();
         tockica.SetActive(true);
-        mainMenuSource.Stop();
 
         foreach (var audioSource in allAudioSources)
         {
-            if (audioSource.mute == true)
+            if (audioSource.mute==false)
             {
-                audioSource.mute = false;
+                audioSource.mute=true;
+            }
+            else
+            {
+                audioSource.mute=false;
             }
         }
+        isPaused=false;
     }
     public void QuitGame(){
         Application.Quit();
