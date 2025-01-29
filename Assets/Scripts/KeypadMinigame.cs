@@ -12,6 +12,7 @@ public class KeypadMinigame : MonoBehaviour
     private List<Button> buttons = new List<Button>();
     private int nextNumber = 1;
     private bool gameStarted = false;
+    public MonoBehaviour cameraScript;
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class KeypadMinigame : MonoBehaviour
 
         List<int> numbers = new List<int>();
         for (int i = 1; i <= 10; i++) numbers.Add(i);
-       
+
 
         int columns = 5; // Number of columns
         float spacingX = 120f; // Adjust horizontal spacing
@@ -101,18 +102,19 @@ public class KeypadMinigame : MonoBehaviour
             {
                 buttonParent.transform.gameObject.SetActive(true);
                 gameStarted = true;
-                
-                        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-        Cursor.visible = true; // Make the cursor visible
+
+                Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+                Cursor.visible = true; // Make the cursor visible
+                cameraScript.enabled = false;
             }
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-        Cursor.visible = true; // Make the cursor visible
+            //       Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+            //    Cursor.visible = true; // Make the cursor visible
             if (Input.anyKeyDown)
             {
-                buttonParent.transform.gameObject.SetActive(false);
+                //     buttonParent.transform.gameObject.SetActive(false);
             }
         }
     }
