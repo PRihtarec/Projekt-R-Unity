@@ -46,7 +46,7 @@ public class AggroController : MonoBehaviour
         }
         if (IsWallBetween(Player, gameObject)){
             range = range * wallRangeMultiplier;
-            UnityEngine.Debug.Log("ZID JE IZMEDU");
+     //       UnityEngine.Debug.Log("ZID JE IZMEDU");
         }
         if (CheckPlayerInRange(range, player, gameObject) && playerMovement.IsPlayerMovingByInput())
         {
