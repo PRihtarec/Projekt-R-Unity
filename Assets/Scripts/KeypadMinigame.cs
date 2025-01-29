@@ -100,6 +100,7 @@ public class KeypadMinigame : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.K))
             {
                 buttonParent.transform.gameObject.SetActive(true);
+                gameStarted = true;
                 
                         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
@@ -107,6 +108,8 @@ public class KeypadMinigame : MonoBehaviour
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Make the cursor visible
             if (Input.anyKeyDown)
             {
                 buttonParent.transform.gameObject.SetActive(false);

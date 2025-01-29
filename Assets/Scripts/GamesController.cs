@@ -7,12 +7,14 @@ public class GamesController : MonoBehaviour
     // Start is called before the first frame update
     private MinigameStart arrowsGame;
     private VentGame ventGame;
+    private KeypadMinigame keypadGame;
     private bool wonGame;
     private bool lostGame;
     void Start()
     {
         arrowsGame = FindObjectOfType<MinigameStart>();
         ventGame = FindObjectOfType<VentGame>();
+        keypadGame = FindObjectOfType<KeypadMinigame>();
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class GamesController : MonoBehaviour
         
     }
     public bool isMinigameInProgress(){
-        return arrowsGame.isGameStarted() || ventGame.isGameStarted();
+        return arrowsGame.isGameStarted() || ventGame.isGameStarted() || keypadGame.isGameStarted();;
     }
     public bool isMinigameWon(){
         bool wonGame2 = wonGame;
