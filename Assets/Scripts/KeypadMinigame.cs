@@ -2,42 +2,49 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using System.Collections;
 
 public class KeypadMinigame : MonoBehaviour
 {
-    public GameObject buttonPrefab;  // Assign a UI Button prefab in the Inspector
-    public Transform buttonParent;   // Assign a UI Panel or empty GameObject as parent
-    public Text messageText;         // Assign a UI Text element
+    public GameObject buttonPrefab;  
+    public Transform buttonParent;   
+    public Text messageText;       
+    public Text passwordText;        
 
     private List<Button> buttons = new List<Button>();
-    private int nextNumber = 1;
+    private int nextNumber;
+    private int nextNumberIndex;
     private bool gameStarted = false;
-    public MonoBehaviour cameraScript;
+  
+    private NumberManager numberManager;
+    List<int> password;
+    public Camera keypadCamera;
+    public Camera mainCamera;
 
     void Start()
     {
-        GenerateButtons();
-
+        numberManager = FindObjectOfType<NumberManager>();
+        keypadCamera.gameObject.SetActive(false);
     }
 
     void GenerateButtons()
     {
-        nextNumber = 1;
+        password = NumberManager.AllGeneratedNumbers;
+        nextNumberIndex = 0;
+        nextNumber = password[0];
         buttons.Clear();
 
         List<int> numbers = new List<int>();
         for (int i = 1; i <= 10; i++) numbers.Add(i);
 
+        int columns = 5; 
+        float spacingX = 80; 
+        float spacingY = 80; 
+        Vector2 startPos = new Vector2(-150, 0); 
 
-        int columns = 5; // Number of columns
-        float spacingX = 120f; // Adjust horizontal spacing
-        float spacingY = 120f; // Adjust vertical spacing
-        Vector2 startPos = new Vector2(-250, 100); // Adjust starting position
-
-        // Clear previous buttons
         foreach (Transform child in buttonParent)
         {
-            if (child.GetType() != typeof(Text))
+            if (child.name != "messageText" && child.name != "password")
             {
                 Destroy(child.gameObject);
             }
@@ -46,7 +53,6 @@ public class KeypadMinigame : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             GameObject newButton = Instantiate(buttonPrefab, buttonParent);
-            UnityEngine.Debug.Log("Creating button #" + (i + 1));
             Button btn = newButton.GetComponent<Button>();
             TMP_Text btnText = newButton.GetComponentInChildren<TMP_Text>();
 
@@ -54,39 +60,78 @@ public class KeypadMinigame : MonoBehaviour
             btnText.text = number.ToString();
             btn.onClick.AddListener(() => OnButtonClick(number, btn));
 
-            // Set position manually
             int row = i / columns;
             int col = i % columns;
             RectTransform rectTransform = newButton.GetComponent<RectTransform>();
 
-            // Ensure correct positioning inside the UI
             rectTransform.localPosition = startPos + new Vector2(col * spacingX, -row * spacingY);
             rectTransform.localScale = Vector3.one;
 
             buttons.Add(btn);
         }
 
-        messageText.text = "Click the numbers in order!";
+        messageText.text = "Enter password!";
+        passwordText.text="";
     }
 
     void OnButtonClick(int number, Button btn)
     {
-        UnityEngine.Debug.Log("KLIKNUT");
         if (number == nextNumber)
         {
-            btn.interactable = false; // Disable button after correct click
-            nextNumber++;
+            nextNumberIndex++;
+            passwordText.text = passwordText.text + number;
 
-            if (nextNumber > 10)
+            if (nextNumberIndex > 5)
             {
-                messageText.text = "You won! Restarting...";
-                Invoke("GenerateButtons", 2f);
+                messageText.text = "Correct!";
+                Invoke("EndMinigame", 2f);
+                return;
             }
+
+            nextNumber = password[nextNumberIndex];
         }
         else
         {
             messageText.text = "Wrong! Try again.";
+            passwordText.text = "";
+            
+            // Flash all buttons red
+            StartCoroutine(FlashButtonsRed());
+            
             Invoke("GenerateButtons", 1.5f);
+        }
+    }
+
+    
+    private IEnumerator FlashButtonsRed()
+    {
+       
+        List<Color> originalColors = new List<Color>();
+        foreach (Button btn in buttons)
+        {
+            originalColors.Add(btn.GetComponent<Image>().color);
+        }
+
+     
+        for (int i = 0; i < 2; i++)
+        {
+     
+            foreach (Button btn in buttons)
+            {
+                btn.GetComponent<Image>().color = Color.red;
+            }
+
+      
+            yield return new WaitForSeconds(0.2f);
+
+      
+            for (int j = 0; j < buttons.Count; j++)
+            {
+                buttons[j].GetComponent<Image>().color = originalColors[j];
+            }
+
+         
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
@@ -94,28 +139,45 @@ public class KeypadMinigame : MonoBehaviour
     {
         return gameStarted;
     }
+
     void Update()
     {
         if (!gameStarted)
         {
             if (Input.GetKeyDown(KeyCode.K))
             {
-                buttonParent.transform.gameObject.SetActive(true);
-                gameStarted = true;
-
-                Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-                Cursor.visible = true; // Make the cursor visible
-                cameraScript.enabled = false;
+                StartMinigame();
             }
         }
         else
         {
-            //       Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-            //    Cursor.visible = true; // Make the cursor visible
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(KeyCode.K))
             {
-                //     buttonParent.transform.gameObject.SetActive(false);
+                EndMinigame();
             }
         }
+    }
+
+    public void StartMinigame()
+    {
+        keypadCamera.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(false);
+        GenerateButtons();
+        buttonParent.transform.gameObject.SetActive(true);
+        gameStarted = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void EndMinigame()
+    {
+        keypadCamera.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(true);
+        buttonParent.transform.gameObject.SetActive(false);
+        gameStarted = false;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
