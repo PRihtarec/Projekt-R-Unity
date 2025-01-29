@@ -27,10 +27,12 @@ public class MonsterController : MonoBehaviour
     public Camera mainCamera;
     public float walkingSpeed = 2f;
     public float runningSpeed = 4f;
+    private bool previousAggroState;
 
 
     void Start()
     {
+        previousAggroState = aggro;
         aggroController = gameObject.GetComponent<AggroController>();
         hodanjeSource.Play();
         player = GameObject.FindGameObjectWithTag("player");
@@ -53,6 +55,23 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
+        if (aggro != previousAggroState){
+            if(aggro)
+            {
+                hodanjeSource.Pause();
+                brzoHodanjeSource.Play();
+                muzikaSource.Pause();
+                chaseMuzikaSource.Play();
+            }
+            else
+            {
+                brzoHodanjeSource.Pause();
+                hodanjeSource.Play();
+                chaseMuzikaSource.Pause();
+                muzikaSource.Play();
+            }
+        }
+        previousAggroState = aggro;
         if (aggro)
         {
             agent.SetDestination(player.transform.position);
@@ -109,10 +128,6 @@ public class MonsterController : MonoBehaviour
             animator2.SetBool("isWalking", false);
             animator.SetBool("isRunning", true);
             animator2.SetBool("isRunning", true);
-            hodanjeSource.Pause();
-            brzoHodanjeSource.Play();
-            muzikaSource.Pause();
-            chaseMuzikaSource.Play();
         }
         else
         {
@@ -121,10 +136,6 @@ public class MonsterController : MonoBehaviour
             animator2.SetBool("isRunning", false);
             animator.SetBool("isWalking", true);
             animator2.SetBool("isWalking", true);
-            brzoHodanjeSource.Pause();
-            hodanjeSource.Play();
-            chaseMuzikaSource.Pause();
-            muzikaSource.Play();
 
         }
     }

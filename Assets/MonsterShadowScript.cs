@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MonsterShadowScript : MonoBehaviour
 {
+    public AudioSource roarSource;
     [SerializeField] private Animator MonsterShadow;
     private void OnTriggerEnter(Collider other){
-        Debug.Log("usao si u triger");
+        Debug.Log("monster flash");
         if (other.CompareTag("player")){
             MonsterShadow.SetTrigger("flicker");
+            roarSource.Play();
         }
     }
 }

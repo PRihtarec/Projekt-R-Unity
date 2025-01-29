@@ -48,11 +48,11 @@ public class AggroController : MonoBehaviour
             range = range * wallRangeMultiplier;
      //       UnityEngine.Debug.Log("ZID JE IZMEDU");
         }
-        if (CheckPlayerInRange(range, player, gameObject) && playerMovement.IsPlayerMovingByInput())
+        if (CheckPlayerInRange(range, player, gameObject) && playerMovement.IsPlayerMovingByInput()&&monsterController.getAggro()==false)
         {
             monsterController.setAggro(true);
         }
-        if (CheckMonsterFlashlight()){
+        if (CheckMonsterFlashlight()&&monsterController.getAggro()==false){
             monsterController.setAggro(true);
         }
 

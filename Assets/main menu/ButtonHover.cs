@@ -12,7 +12,6 @@ public class TextFlicker : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public float flickerSpeed = 0.5f; // Time between each fade cycle
     private bool isHovered = false; // Track if the mouse is hovering over the text
     private bool shouldFade = true; // Flag to control whether fading should happen
-    private float targetAlpha = 1f; // The target alpha value for fading
 
     private void Start()
     {
@@ -32,7 +31,7 @@ public class TextFlicker : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 float t = 0;
                 while (t < fadeInTime && !isHovered)
                 {
-                    t += Time.deltaTime;
+                    t += Time.unscaledDeltaTime; // Use unscaledDeltaTime to ignore timeScale
                     canvasGroup.alpha = Mathf.Lerp(0.3f, 1, t / fadeInTime);
                     yield return null;
                 }
@@ -41,13 +40,13 @@ public class TextFlicker : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 t = 0;
                 while (t < fadeOutTime && !isHovered)
                 {
-                    t += Time.deltaTime;
+                    t += Time.unscaledDeltaTime; // Use unscaledDeltaTime here too
                     canvasGroup.alpha = Mathf.Lerp(1, 0.3f, t / fadeOutTime);
                     yield return null;
                 }
 
                 // Wait for the next cycle
-                yield return new WaitForSeconds(flickerSpeed);
+                yield return new WaitForSecondsRealtime(flickerSpeed); // Ensures delay works when paused
             }
             else
             {
