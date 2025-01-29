@@ -13,7 +13,9 @@ public class mainMenu : MonoBehaviour
     private AudioSource[] allAudioSources; 
     public GameObject tockica;
     private bool isPaused;
+    GamesController gamesController;
     void Start(){
+        gamesController = FindObjectOfType<GamesController>();
         isPaused=false;
         allAudioSources = FindObjectsOfType<AudioSource>();
         if (PlayerPrefs.HasKey("musicVolume"))
@@ -30,13 +32,15 @@ public class mainMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame(); 
+            if(!gamesController.isMinigameInProgress()){
+                if (isPaused)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    PauseGame(); 
+                }
             }
         }
     }

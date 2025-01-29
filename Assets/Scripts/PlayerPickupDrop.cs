@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerPickupDrop : MonoBehaviour
 {   
+    public AudioSource objectDropSource;
+    public AudioSource keySource;
     [SerializeField] private Transform playerCameraPosition;
     [SerializeField] private Transform playerCameraRotation;
     [SerializeField] private Transform objectGrabPointTransform;
@@ -40,6 +42,10 @@ public class PlayerPickupDrop : MonoBehaviour
                     if(raycastHit.transform.TryGetComponent(out objectGrabbable)){
                         objectGrabbable.Grab(objectGrabPointTransform); //postavljanje objekta u lijevu ruku
                         Debug.Log(objectGrabbable);
+                        if (raycastHit.transform.CompareTag("Key") && keySource != null)
+                        {
+                            keySource.Play();
+                        }
                     }
                     else if(raycastHit.transform.TryGetComponent(out flashlightGrabbable)){
                         flashlightGrabbable.Grab(FlashlightLocation); //postavljanje objekta u desnu ruku
@@ -52,6 +58,7 @@ public class PlayerPickupDrop : MonoBehaviour
         else{
             //dropamo
             objectGrabbable.Drop();
+            objectDropSource.Play();
             objectGrabbable = null;
         }
         if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit2, pickUpRange, minigameLayerMask)) {
