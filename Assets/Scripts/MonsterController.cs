@@ -61,24 +61,24 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        UnityEngine.Debug.Log(aggro);
+       // UnityEngine.Debug.Log(aggro);
         if (player == null || gameObject == null){
             return;
         }
         if (aggro != previousAggroState){
             if(aggro)
             {
-                hodanjeSource.Pause();
-                brzoHodanjeSource.Play();
-                muzikaSource.Pause();
-                chaseMuzikaSource.Play();
+            //    hodanjeSource.Pause();
+             //   brzoHodanjeSource.Play();
+             ///   muzikaSource.Pause();
+             //   chaseMuzikaSource.Play();
             }
             else
             {
-                brzoHodanjeSource.Pause();
-                hodanjeSource.Play();
-                chaseMuzikaSource.Pause();
-                muzikaSource.Play();
+              //  brzoHodanjeSource.Pause();
+             //   hodanjeSource.Play();
+            //    chaseMuzikaSource.Pause();
+            //    muzikaSource.Play();
             }
         }
         previousAggroState = aggro;
@@ -117,6 +117,7 @@ public class MonsterController : MonoBehaviour
         Transform finalDestination = destinationRoom.transform.GetChild(finalDestinationIndex);
 
         agent.destination = finalDestination.position;
+        UnityEngine.Debug.Log("stavio desTinaciju na" + finalDestination.position);
 
         int newDestinationIndex = Random.Range(0, destinations.Length);
         while (destinationIndex == newDestinationIndex)
@@ -135,27 +136,36 @@ public class MonsterController : MonoBehaviour
             StartCoroutine(PerformRoarBeforeAggro());
         }
 
-        aggro = ifAggro;
+     //   aggro = ifAggro;
 
-        if (aggro)
+        if (!aggro && ifAggro)
         {
             agent.speed = runningSpeed;
             animator.SetBool("isWalking", false);
             animator2.SetBool("isWalking", false);
             animator.SetBool("isRunning", true);
             animator2.SetBool("isRunning", true);
+                            hodanjeSource.Pause();
+                brzoHodanjeSource.Play();
+                muzikaSource.Pause();
+                chaseMuzikaSource.Play();
         }
-        else
+        if (!ifAggro && aggro)
         {
             agent.speed = walkingSpeed;
             animator.SetBool("isRunning", false);
             animator2.SetBool("isRunning", false);
             animator.SetBool("isWalking", true);
             animator2.SetBool("isWalking", true);
+             brzoHodanjeSource.Pause();
+                hodanjeSource.Play();
+                chaseMuzikaSource.Pause();
+                muzikaSource.Play();
             
             GotoNextPoint();
 
         }
+        aggro = ifAggro;
     }
     private IEnumerator PerformRoarBeforeAggro()
     {
@@ -256,10 +266,10 @@ public class MonsterController : MonoBehaviour
     public bool isPlayerInSafeRoom()
     {
         bool safe = player.transform.position.x >= -83 && player.transform.position.x < -76 && player.transform.position.z >= -1 && player.transform.position.z <= 10;
-        if (safe)
-        {
-            setAggro(false);
-        }
+     //   if (safe)
+      //  {
+      //      setAggro(false);
+      //  }
         return safe;
     }
     public bool isInViewOfPlayer()

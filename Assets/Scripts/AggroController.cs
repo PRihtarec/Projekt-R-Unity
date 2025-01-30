@@ -42,6 +42,9 @@ public class AggroController : MonoBehaviour
         {
             return;
         }
+        if (monsterController.isPlayerInSafeRoom()){
+            monsterController.setAggro(false);
+        }
         distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
         float range = walkingRange;
         if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
