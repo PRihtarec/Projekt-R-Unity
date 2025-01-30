@@ -15,6 +15,7 @@ public class MonsterController : MonoBehaviour
     public GameObject drugoCudoviste;
 
     private GameObject player;
+    private GameObject Player;
     private NavMeshAgent agent;
     private Animator animator;
     private Animator animator2;
@@ -40,6 +41,7 @@ public class MonsterController : MonoBehaviour
         aggroController = gameObject.GetComponent<AggroController>();
         hodanjeSource.Play();
         player = GameObject.FindGameObjectWithTag("player");
+        Player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
         Transform childTransform = transform.Find("Creep_mesh");
         Transform childTransform2 = transform.Find("Creep_mesh_lod1");
@@ -53,12 +55,13 @@ public class MonsterController : MonoBehaviour
         agent.isStopped = false;
         animator.SetBool("isWalking", true);
         animator2.SetBool("isWalking", true);
-        agent.speed = 2;
+        agent.speed = walkingSpeed;
         GotoNextPoint();
     }
 
     void Update()
     {
+        UnityEngine.Debug.Log(aggro);
         if (player == null || gameObject == null){
             return;
         }
@@ -126,7 +129,7 @@ public class MonsterController : MonoBehaviour
 
     public void setAggro(bool ifAggro)
     {
-
+        
         if (ifAggro && !aggro)
         {
             StartCoroutine(PerformRoarBeforeAggro());
@@ -149,6 +152,8 @@ public class MonsterController : MonoBehaviour
             animator2.SetBool("isRunning", false);
             animator.SetBool("isWalking", true);
             animator2.SetBool("isWalking", true);
+            
+            GotoNextPoint();
 
         }
     }
@@ -207,7 +212,9 @@ public class MonsterController : MonoBehaviour
             {
                 animator.SetTrigger("Roar");
                 animator2.SetTrigger("Roar");
+                if (!isPlayerInSafeRoom()){
                 setAggro(true);
+                }
             }
             yield return new WaitForSeconds(4.5f);
         }
@@ -266,4 +273,37 @@ public class MonsterController : MonoBehaviour
 
 
     }
+public static bool HasLineOfSight(Transform objectA, Transform objectB, Transform objectC)
+{
+    if (objectA == null || objectB == null)
+    {
+        Debug.LogWarning("One or both objects are null!");
+        return false;
+    }
+
+    Vector3 direction = (objectB.position - objectA.position).normalized;
+    float distance = Vector3.Distance(objectA.position, objectB.position);
+
+    // Perform a raycast and collect all hits along the ray
+    RaycastHit[] hits = Physics.RaycastAll(objectA.position, direction, distance);
+
+    // Sort hits by distance to ensure we process the closest objects first
+    System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+    foreach (RaycastHit hit in hits)
+    {
+        if (hit.transform == objectB || hit.transform == objectC)
+        {
+            return true; // Target is reached without obstruction
+        }
+        else
+        {
+            Debug.Log($"Hit object before target: {hit.transform.name}");
+            return false; // There is something blocking the way
+        }
+    }
+
+    return false; // No objects hit, meaning no clear sight
+}
+
 }
