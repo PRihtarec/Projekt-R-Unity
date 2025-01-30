@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PolugaScript : MonoBehaviour
 {
+    public AudioSource odbrojavanjeSource;
     private bool isClickable = true; //cooldown za klikanje
     [SerializeField] private Animator animator; //animator za upravljanje polugom
 
@@ -41,12 +42,13 @@ public class PolugaScript : MonoBehaviour
             Debug.Log("Trigger is on cooldown.");
             return; //ako je cooldown aktivan nema interakcije
         }
-
+        odbrojavanjeSource.Play();
         animator.SetTrigger(activateTrigger);
         foreach (Animator lightAnimator in lightAnimators)
         {
             lightAnimator.SetTrigger(activateTrigger);
         }
+
 
         Debug.Log($"Poluga aktivirana. Cooldown vrijeme: {cooldownTime} sekundi.");
 
@@ -75,6 +77,7 @@ public class PolugaScript : MonoBehaviour
     private void ResetTrigger()
     {
         isClickable = true; // Ponovno omogućuje klikanje
+        odbrojavanjeSource.Stop();
         Debug.Log("Poluga se opet može podignuti");
     }
 }

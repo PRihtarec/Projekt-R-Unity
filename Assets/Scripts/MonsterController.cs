@@ -12,6 +12,8 @@ public class MonsterController : MonoBehaviour
     public AudioSource hodanjeSource;
     public AudioSource brzoHodanjeSource;
 
+    public GameObject drugoCudoviste;
+
     private GameObject player;
     private NavMeshAgent agent;
     private Animator animator;
@@ -28,10 +30,12 @@ public class MonsterController : MonoBehaviour
     public float walkingSpeed = 2f;
     public float runningSpeed = 4f;
     private bool previousAggroState;
+    private bool first;
 
 
     void Start()
     {
+        first=true;
         previousAggroState = aggro;
         aggroController = gameObject.GetComponent<AggroController>();
         hodanjeSource.Play();
@@ -72,6 +76,12 @@ public class MonsterController : MonoBehaviour
             }
         }
         previousAggroState = aggro;
+        if(isPlayerInSafeRoom()&&first){
+            chaseMuzikaSource.Pause();
+            muzikaSource.Play();
+            drugoCudoviste.SetActive(false);
+            first=false;
+        }
         if (aggro)
         {
             agent.SetDestination(player.transform.position);

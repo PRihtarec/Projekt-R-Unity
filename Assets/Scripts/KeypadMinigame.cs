@@ -6,6 +6,7 @@ using System.Collections;
 
 public class KeypadMinigame : MonoBehaviour
 {
+    public AudioSource wrongSource;
     public GameObject buttonPrefab;  
     public Transform buttonParent;   
     public Text messageText;       
@@ -105,6 +106,7 @@ public class KeypadMinigame : MonoBehaviour
     
     private IEnumerator FlashButtonsRed()
     {
+        wrongSource.Play();
        
         List<Color> originalColors = new List<Color>();
         foreach (Button btn in buttons)

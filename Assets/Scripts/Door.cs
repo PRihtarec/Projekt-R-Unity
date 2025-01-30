@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public AudioSource openSource;
+    public AudioSource closeSource;
     bool toggle = false;
     public Animator dooranimation;
     
     [SerializeField] private bool closeTrigger = false;
     public void close() {
         toggle=false;
+        closeSource.Play();
         dooranimation.ResetTrigger("open");
         dooranimation.SetTrigger("close");
     
@@ -17,6 +20,7 @@ public class Door : MonoBehaviour
     }
     public void open() {
         toggle=false;
+        openSource.Play();
         dooranimation.ResetTrigger("close");
         dooranimation.SetTrigger("open");
     

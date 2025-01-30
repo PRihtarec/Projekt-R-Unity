@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MinigameStart : MonoBehaviour
 {
+    public AudioSource wrongSource;
     public Camera mainCamera;
     public Camera minigameCamera;
     public GameObject arrowPrefab;
@@ -47,6 +48,7 @@ public class MinigameStart : MonoBehaviour
     {
  
         EndMinigame();
+        wrongSource.Play();
         StartMinigame();
 
     }
