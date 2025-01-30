@@ -104,14 +104,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
-        {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
-        }
+     //   if(Input.GetKey(jumpKey) && readyToJump && grounded)
+     //   {
+     //       readyToJump = false;
+//
+     //       Jump();
+//
+    //        Invoke(nameof(ResetJump), jumpCooldown);
+    //    }
 
         // Check if sprinting
         if (Input.GetKey(sprintKey) && !Input.GetKey(KeyCode.LeftControl))

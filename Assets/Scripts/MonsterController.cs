@@ -32,6 +32,7 @@ public class MonsterController : MonoBehaviour
     public float runningSpeed = 4f;
     private bool previousAggroState;
     private bool first;
+    public GameObject body;
 
 
     void Start()
@@ -277,13 +278,17 @@ public class MonsterController : MonoBehaviour
         Vector3 viewportPos = mainCamera.WorldToViewportPoint(gameObject.transform.position);
 
         // Check if the object is in the camera's viewport
-        return viewportPos.z > 0 &&
+        
+        Debug.Log((viewportPos.z > 0 &&
                         viewportPos.x > 0 && viewportPos.x < 1 &&
-                        viewportPos.y > 0 && viewportPos.y < 1;
+                        viewportPos.y > 0 && viewportPos.y < 1) && HasLineOfSight(body.transform, Player.transform) && getPlayerDistance()<=15);
+        return (viewportPos.z > 0 &&
+                        viewportPos.x > 0 && viewportPos.x < 1 &&
+                        viewportPos.y > 0 && viewportPos.y < 1) && HasLineOfSight(body.transform, Player.transform) && getPlayerDistance()<=15;
 
 
     }
-public static bool HasLineOfSight(Transform objectA, Transform objectB, Transform objectC)
+public static bool HasLineOfSight(Transform objectA, Transform objectB)
 {
     if (objectA == null || objectB == null)
     {
@@ -302,9 +307,12 @@ public static bool HasLineOfSight(Transform objectA, Transform objectB, Transfor
 
     foreach (RaycastHit hit in hits)
     {
-        if (hit.transform == objectB || hit.transform == objectC)
+        // If the hit object is the target or one of its children, return true
+        if (hit.transform == objectB || hit.transform.IsChildOf(objectB))
         {
+            
             return true; // Target is reached without obstruction
+            
         }
         else
         {
