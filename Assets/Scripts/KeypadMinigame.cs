@@ -22,6 +22,8 @@ public class KeypadMinigame : MonoBehaviour
     public Camera keypadCamera;
     public Camera mainCamera;
 
+    [SerializeField] private Animator exitDoorAnimator;
+
     void Start()
     {
         numberManager = FindObjectOfType<NumberManager>();
@@ -85,6 +87,9 @@ public class KeypadMinigame : MonoBehaviour
             if (nextNumberIndex > 5)
             {
                 messageText.text = "Correct!";
+
+                exitDoorAnimator.SetTrigger("OpenDoor");
+
                 Invoke("EndMinigame", 2f);
                 return;
             }
@@ -144,18 +149,14 @@ public class KeypadMinigame : MonoBehaviour
 
     void Update()
     {
-        if (!gameStarted)
+        if (gameStarted)
+        
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            Debug.Log(gameStarted);
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                StartMinigame();
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                EndMinigame();
+                Debug.Log("Izlazim iz keypad kamere");
+                Invoke("EndMinigame", 0f);
             }
         }
     }
@@ -181,5 +182,7 @@ public class KeypadMinigame : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log("Minigame ended");
     }
+    
 }

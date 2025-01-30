@@ -13,7 +13,10 @@ public class PlayerPickupDrop : MonoBehaviour
     [SerializeField] private LayerMask minigameLayerMask;
     [SerializeField] private LayerMask lightswitchLayerMask;
     [SerializeField] private LayerMask polugaLayerMask;
+
     [SerializeField] private float pickUpRange=2f;
+
+    [SerializeField] private KeypadMinigame keypadMinigame;
 
     [SerializeField] private Transform FlashlightLocation; //desna ruka
     private objectGrabbable objectGrabbable;
@@ -81,10 +84,19 @@ public class PlayerPickupDrop : MonoBehaviour
                     ventGame.StartMinigame();
                     }
                 }
-
+                else if (raycastHit2.transform.name == "KeypadTrigger") {
+                    if (!keypadMinigame.isGameStarted()) //raycasta samo ako minigame nije pokrenut
+                        {
+                        keypadMinigame.StartMinigame();
+                        }
+                    else
+                        {
+                        Debug.Log("Minigame vec radi pa raycast nije u funkciji");
+                        }
+            }
                 
             }
-            if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit4, pickUpRange, polugaLayerMask))
+            else if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit4, pickUpRange, polugaLayerMask))
         {
             Debug.Log("Hit Poluga " + raycastHit4.transform.name);
 

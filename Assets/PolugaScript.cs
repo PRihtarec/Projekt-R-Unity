@@ -16,6 +16,10 @@ public class PolugaScript : MonoBehaviour
 
     private List<Animator> lightAnimators = new();
 
+    [SerializeField] private KeypadMinigame keypadMinigame;
+    [SerializeField] private GameObject keypadTrigger;
+
+
     void Start()
     {
         //ucitavanje svih animatora svijetla
@@ -44,6 +48,10 @@ public class PolugaScript : MonoBehaviour
         }
         odbrojavanjeSource.Play();
         animator.SetTrigger(activateTrigger);
+
+        //ukljucuje se exitminigaemtrigger
+        keypadTrigger.SetActive(true);
+
         foreach (Animator lightAnimator in lightAnimators)
         {
             lightAnimator.SetTrigger(activateTrigger);
@@ -70,6 +78,9 @@ public class PolugaScript : MonoBehaviour
             {
                 lightAnimator.SetTrigger(deactivateTrigger);
             }
+            odbrojavanjeSource.Stop();
+            keypadTrigger.SetActive(false);
+            keypadMinigame.EndMinigame();
             Debug.Log("Poluga opet spuštena");
         }
     }
@@ -77,7 +88,6 @@ public class PolugaScript : MonoBehaviour
     private void ResetTrigger()
     {
         isClickable = true; // Ponovno omogućuje klikanje
-        odbrojavanjeSource.Stop();
         Debug.Log("Poluga se opet može podignuti");
     }
 }
