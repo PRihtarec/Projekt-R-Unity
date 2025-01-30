@@ -41,6 +41,7 @@ public class DetekcijaIgraca : MonoBehaviour
             if (monsterAnimator != null)
             {
                 monsterAnimator.SetTrigger("Bite");
+                monsterAnimator.speed=2f;
             }
 
             if (monsterLight != null)
