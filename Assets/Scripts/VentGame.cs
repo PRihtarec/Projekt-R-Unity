@@ -15,6 +15,7 @@ public class VentGame : MonoBehaviour
     private List<int> spawnOrder;
 
     private bool gameStarted = false;
+    private bool ventOpen = false;
 
     // Reference to child images (topLeft, topRight, botLeft, botRight)
     public GameObject topLeft;
@@ -74,6 +75,7 @@ public class VentGame : MonoBehaviour
 
         customPointer.SetActive(false); // Hide the custom pointer
         gameStarted = false;
+        ventOpen= true;
 
         Debug.Log("Minigame ended.");
     }
@@ -102,7 +104,7 @@ public class VentGame : MonoBehaviour
         {
             EndMinigame();
             StartCoroutine(MoveVent(0, 0f));
-            StartCoroutine(MoveVent(1, 3f));
+            
             return;
         }
 
@@ -114,7 +116,7 @@ public class VentGame : MonoBehaviour
 
         currentCircleIndex++;
     }
- IEnumerator MoveVent(int smjer, float delay)
+ public IEnumerator MoveVent(int smjer, float delay)
 
     {
         yield return new WaitForSeconds(delay);
@@ -141,9 +143,17 @@ public class VentGame : MonoBehaviour
 
         // Ensure the object reaches the target position at the end
         vent.transform.position = targetPosition;
+        
     }
     public bool isGameStarted(){
         return gameStarted;
+    }
+
+    public bool isVentOpen(){
+        return ventOpen;
+    }
+    public void ventToggle(){
+        ventOpen=false;
     }
     void Update()
     {
