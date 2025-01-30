@@ -12540,7 +12540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 177171479}
-  Destroyfirstroom: {fileID: 0}
+  unableChaseScene: {fileID: 0}
 --- !u!65 &171236415
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15683,7 +15683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43dd1ba2a5dde844eb01240da13ab96b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.02
+      value: 7.962645
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43dd1ba2a5dde844eb01240da13ab96b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42496,7 +42496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 412390, guid: 22f5407fceb4bb74b930f5f2b49aa876, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.387
+      value: -21.200005
       objectReference: {fileID: 0}
     - target: {fileID: 412390, guid: 22f5407fceb4bb74b930f5f2b49aa876, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42504,7 +42504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 412390, guid: 22f5407fceb4bb74b930f5f2b49aa876, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 56.018
+      value: 55.15
       objectReference: {fileID: 0}
     - target: {fileID: 412390, guid: 22f5407fceb4bb74b930f5f2b49aa876, type: 3}
       propertyPath: m_LocalRotation.w
@@ -84768,7 +84768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 51004227}
-  Destroyfirstroom: {fileID: 0}
+  unableChaseScene: {fileID: 1095245666}
 --- !u!65 &1144484218
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -120845,7 +120845,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -120887,7 +120887,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -134822,11 +134822,11 @@ MonoBehaviour:
   hodanjeSource: {fileID: 1732671722}
   brzoHodanjeSource: {fileID: 1732671728}
   drugoCudoviste: {fileID: 1538622202}
-  sniffDetectionRange: 20
+  sniffDetectionRange: 5
   interrupt: 0
   mainCamera: {fileID: 963194227}
-  walkingSpeed: 3
-  runningSpeed: 6
+  walkingSpeed: 2
+  runningSpeed: 4
 --- !u!195 &1732671716
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -134837,7 +134837,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -134861,9 +134861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed26ff1c77bae64988fc79c06c45aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchingRange: 5
-  walkingRange: 9
-  sprintingRange: 15
+  crouchingRange: 1
+  walkingRange: 2
+  sprintingRange: 5
   wallRangeMultiplier: 0.3
   flashlight: {fileID: 1576985575}
   flashlightLight: {fileID: 1576985577}
@@ -171573,10 +171573,6 @@ PrefabInstance:
     - target: {fileID: 7417549112927347229, guid: bce84e9d68d868a4aa2a88f5c193dc82, type: 3}
       propertyPath: m_ReceiveShadows
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7484541793814713023, guid: bce84e9d68d868a4aa2a88f5c193dc82, type: 3}
-      propertyPath: m_Range
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7484541793814713023, guid: bce84e9d68d868a4aa2a88f5c193dc82, type: 3}
       propertyPath: m_Shadows.m_Strength

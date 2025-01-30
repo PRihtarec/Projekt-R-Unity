@@ -5,12 +5,19 @@ using UnityEngine;
 public class DoorCloseTrigger : MonoBehaviour
 {
     [SerializeField] private Door door;
-    [SerializeField] private GameObject Destroyfirstroom;
+    [SerializeField] private GameObject unableChaseScene;
+
+    private bool alreadyTriggered = false;
     private void OnTriggerEnter(Collider other){
-        Debug.Log("usao si u triger");
+        Debug.Log("usao si u trigger za zatvaranje vrata - DoorCloseTrigger");
+        if (alreadyTriggered) return;
+        
         if (other.CompareTag("player")){
             door.close();
-            Destroy(Destroyfirstroom);
+            alreadyTriggered = true;
+            if (unableChaseScene!= null)
+            unableChaseScene.SetActive(false);
+            
         }
     }
 }
