@@ -12,17 +12,19 @@ public class Door : MonoBehaviour
     [SerializeField] private bool closeTrigger = false;
     public void close() {
         toggle=false;
-        closeSource.Play();
         dooranimation.ResetTrigger("open");
         dooranimation.SetTrigger("close");
+        closeSource.Play();
+        
     
     
     }
     public void open() {
         toggle=false;
-        openSource.Play();
         dooranimation.ResetTrigger("close");
         dooranimation.SetTrigger("open");
+        openSource.Play();
+        
     
     
     }
