@@ -7,6 +7,8 @@ using System.Collections;
 public class KeypadMinigame : MonoBehaviour
 {
     public AudioSource wrongSource;
+    public AudioSource passwordCorrect;
+    public AudioSource doorOpeningSound;
     public GameObject buttonPrefab;  
     public Transform buttonParent;   
     public Text messageText;       
@@ -87,8 +89,11 @@ public class KeypadMinigame : MonoBehaviour
             if (nextNumberIndex > 5)
             {
                 messageText.text = "Correct!";
+                passwordCorrect.Play();
 
                 exitDoorAnimator.SetTrigger("OpenDoor");
+
+                doorOpeningSound.Play();
 
                 Invoke("EndMinigame", 2f);
                 return;
