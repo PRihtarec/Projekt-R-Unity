@@ -59,6 +59,9 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
+        if (player == null || gameObject == null){
+            return;
+        }
         if (aggro != previousAggroState){
             if(aggro)
             {

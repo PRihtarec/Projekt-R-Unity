@@ -43,6 +43,9 @@ public class MonsterControllerHallway : MonoBehaviour
 
     void Update()
     {
+        if (player == null){
+            return;
+        }
         if (aggro)
         {
             agent.SetDestination(player.transform.position);

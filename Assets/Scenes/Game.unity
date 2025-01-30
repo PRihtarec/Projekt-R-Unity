@@ -76102,6 +76102,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4593319749463374, guid: 5235cab164657264b9fd0e97c8653b3a, type: 3}
   m_PrefabInstance: {fileID: 563338385}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1106492713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5072471308829416808, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+  m_PrefabInstance: {fileID: 1846861073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2ff3e66e085144483045cc0b4ec058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1106915206
 GameObject:
   m_ObjectHideFlags: 0
@@ -129774,7 +129785,7 @@ MonoBehaviour:
   monsterAnimator: {fileID: 1868678082}
   monsterLight: {fileID: 1461890318}
   bloodBurstEffect: {fileID: 495286471}
-  fadeManager: {fileID: 0}
+  fadeManager: {fileID: 1106492713}
   youDiedScreen: {fileID: 394444961}
 --- !u!4 &1753327464 stripped
 Transform:
@@ -137730,6 +137741,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 330921096242136778, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1268375709573512075, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -146839,6 +146854,10 @@ PrefabInstance:
     - target: {fileID: 2111780358539899329, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
       propertyPath: m_Name
       value: monsterCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8733608748181307168, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

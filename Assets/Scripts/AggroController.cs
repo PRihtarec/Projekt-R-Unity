@@ -34,6 +34,12 @@ public class AggroController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Player == null || gameObject == null){
+            return;
+        }
+        if (gameObject.name.Equals("CreepHalway")){
+            return;
+        }
         distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
         float range = walkingRange;
         if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
