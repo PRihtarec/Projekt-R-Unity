@@ -104,7 +104,8 @@ public class LSLOutletController : MonoBehaviour
             flashlightUpaljen = flashlight.isFlashlightActive();
             vidljivoCudoviste = monsterController.isInViewOfPlayer();
             igraMinigame = gamesController.isMinigameInProgress();
-            mrtav = (player == null);
+            mrtav = !(player.gameObject.activeSelf);
+            
 
             data[0] = croucha ? 8.0f : 0.0f;
             data[1] = hoda ? 10.0f : 0.0f;

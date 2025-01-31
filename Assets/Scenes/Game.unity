@@ -144198,15 +144198,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1268375709573512075, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1268375709573512075, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1268375709573512075, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1268375709573512075, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -144228,13 +144228,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1688143427029908643, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688143427029908643, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923233398768901186, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 3021633274006473704, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_Name
       value: YouDiedScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 3021633274006473704, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5072471308829416808, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: fadeDuration
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706716323782527176, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706716323782527176, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

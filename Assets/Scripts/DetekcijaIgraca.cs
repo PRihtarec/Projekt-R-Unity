@@ -53,7 +53,8 @@ public class DetekcijaIgraca : MonoBehaviour
             {
                 bloodBurstEffect.Play();
             }            
-            Destroy(PlayerTrigger.transform.root.gameObject);
+          //  Destroy(PlayerTrigger.transform.root.gameObject);
+          PlayerTrigger.transform.root.gameObject.SetActive(false);
             Debug.Log("Player destroyed.");
 
             if (youDiedScreen != null)
