@@ -17,5 +17,8 @@ public class NumberManager : MonoBehaviour
         if(addedCards == 6)
             Debug.Log("sifra:" + string.Join("", AllGeneratedNumbers));     //radi debugganja
     }
+    void Start(){
+        AllGeneratedNumbers = new List<int>();
+    }
 }
     
