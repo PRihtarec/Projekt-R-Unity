@@ -60,9 +60,7 @@ public class PlayerPickupDrop : MonoBehaviour
         } 
         else{
             //dropamo
-            objectGrabbable.Drop();
-            objectDropSource.Play();
-            objectGrabbable = null;
+            DropObject();
         }
         if (Physics.Raycast(playerCameraPosition.position, playerCameraRotation.forward, out RaycastHit raycastHit2, pickUpRange, minigameLayerMask)) {
                 Debug.Log(raycastHit2.transform.name);
@@ -124,6 +122,16 @@ public class PlayerPickupDrop : MonoBehaviour
             }
         }
             
+        }
+    }
+    public void DropObject()
+    {
+        if (objectGrabbable != null)
+        {
+            objectGrabbable.Drop();
+            objectDropSource.Play();
+            objectGrabbable = null;
+            Debug.Log("Object dropped.");
         }
     }
 }
