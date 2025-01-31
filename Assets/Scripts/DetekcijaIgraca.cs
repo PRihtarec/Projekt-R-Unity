@@ -10,6 +10,7 @@ public class DetekcijaIgraca : MonoBehaviour
     [SerializeField] private ParticleSystem bloodBurstEffect;
     [SerializeField] private FadeToBlackAndLoadMenu fadeManager;
     [SerializeField] private GameObject youDiedScreen;
+    public AudioListener audioListener;
     private void Start()
     {
         if(monsterCamera != null){
@@ -31,6 +32,7 @@ public class DetekcijaIgraca : MonoBehaviour
 
         if (PlayerTrigger.CompareTag("player"))
         {
+            audioListener.enabled = true;
             // jumpscare
             if (monsterCamera != null)
             {

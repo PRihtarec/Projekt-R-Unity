@@ -61479,6 +61479,11 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 2630410691245244734, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
   m_PrefabInstance: {fileID: 1977792125}
   m_PrefabAsset: {fileID: 0}
+--- !u!81 &829592614 stripped
+AudioListener:
+  m_CorrespondingSourceObject: {fileID: 8733608748181307168, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
+  m_PrefabInstance: {fileID: 1977792125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &831259839
 GameObject:
   m_ObjectHideFlags: 0
@@ -89705,7 +89710,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205865667}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1205865670
 Camera:
   m_ObjectHideFlags: 0
@@ -120947,6 +120952,7 @@ MonoBehaviour:
   bloodBurstEffect: {fileID: 437579499}
   fadeManager: {fileID: 1106492713}
   youDiedScreen: {fileID: 394444961}
+  audioListener: {fileID: 1205865669}
 --- !u!114 &1538622204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136208,6 +136214,7 @@ MonoBehaviour:
   bloodBurstEffect: {fileID: 495286471}
   fadeManager: {fileID: 1106492713}
   youDiedScreen: {fileID: 394444961}
+  audioListener: {fileID: 829592614}
 --- !u!4 &1753327464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7355997423948992944, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
@@ -153547,7 +153554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8733608748181307168, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
