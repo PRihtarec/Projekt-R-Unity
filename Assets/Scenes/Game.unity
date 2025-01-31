@@ -70583,10 +70583,11 @@ MonoBehaviour:
   channelFormat: 1
   streamName: unity_lsl_my_stream_name
   streamType: LSL
-  channelNum: 11
+  channelNum: 10
   nominalSamplingRate: 100
   start_time: 0
   sent_samples: 0
+  croucha: 1
   hoda: 0
   trci: 0
   igraMinigame: 0
@@ -70594,7 +70595,7 @@ MonoBehaviour:
   presaoMinigame: 0
   failoMinigame: 0
   udaljenost: 0
-  strasanZvukAktivan: 0
+  mrtav: 0
   chasea: 0
   vidljivoCudoviste: 0
   saferoom: 0
@@ -135108,7 +135109,7 @@ MonoBehaviour:
   mainCamera: {fileID: 963194227}
   walkingSpeed: 2
   runningSpeed: 4
-  body: {fileID: 0}
+  body: {fileID: 1753327457}
 --- !u!195 &1732671716
 NavMeshAgent:
   m_ObjectHideFlags: 0
