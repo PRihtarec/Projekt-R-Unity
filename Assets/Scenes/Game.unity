@@ -135109,7 +135109,7 @@ MonoBehaviour:
   mainCamera: {fileID: 963194227}
   walkingSpeed: 2
   runningSpeed: 4
-  body: {fileID: 0}
+  body: {fileID: 1753327457}
 --- !u!195 &1732671716
 NavMeshAgent:
   m_ObjectHideFlags: 0
