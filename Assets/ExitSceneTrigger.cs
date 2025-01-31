@@ -11,6 +11,8 @@ public class ExitSceneTrigger : MonoBehaviour
         {
             Debug.Log("Pobjeda!!!! Vraća se u main menu");
             
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("main menu");
         }
     }
