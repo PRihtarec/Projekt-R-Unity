@@ -70584,7 +70584,7 @@ MonoBehaviour:
   streamName: unity_lsl_my_stream_name
   streamType: LSL
   channelNum: 10
-  nominalSamplingRate: 100
+  nominalSamplingRate: 256
   start_time: 0
   sent_samples: 0
   croucha: 1
