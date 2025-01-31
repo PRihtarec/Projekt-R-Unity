@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio")]
     public AudioSource hodanjeSource;
     public AudioSource brzoHodanjeSource;
+    public AudioSource crouchSource;
 
 
     [Header("Movement")]
@@ -101,6 +102,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 brzoHodanjeSource.Stop();
             }
+            if (crouchSource.isPlaying)
+            {
+                crouchSource.Stop();
+            }
         }
 
         // when to jump
@@ -124,9 +129,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 hodanjeSource.Stop();
             }
+            if (crouchSource.isPlaying)
+            {
+                crouchSource.Stop();
+            }
+
             moveSpeed = sprintSpeed;
         }
-        else
+        else if(!Input.GetKey(KeyCode.LeftControl))
         {
             if (!hodanjeSource.isPlaying)
             {
@@ -136,10 +146,26 @@ public class PlayerMovement : MonoBehaviour
             {
                 brzoHodanjeSource.Stop();
             }
+            if (crouchSource.isPlaying)
+            {
+                crouchSource.Stop();
+            }
             moveSpeed = walkSpeed;
         }
         if (Input.GetKey(KeyCode.LeftControl))
         {
+            if (!crouchSource.isPlaying)
+            {
+                crouchSource.Play();
+            }
+            if (brzoHodanjeSource.isPlaying)
+            {
+                brzoHodanjeSource.Stop();
+            }
+            if (hodanjeSource.isPlaying)
+            {
+                hodanjeSource.Stop();
+            }
             Vector3 currentScale = transform.localScale;
             transform.localScale = new Vector3(currentScale.x, crouchingHeight, currentScale.z);
             moveSpeed = crouchSpeed;

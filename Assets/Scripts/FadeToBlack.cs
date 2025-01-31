@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class FadeToBlackAndLoadMenu : MonoBehaviour
 {
+    public AudioSource jumpscareSource;
+    public AudioSource chompSource;
+    public AudioSource screamSource;
+    public AudioSource hodanjeSource;
+    public AudioSource muzika;
+    public GameObject monster;
+
     [SerializeField] private Image fadeImage;
     [SerializeField] private TextMeshProUGUI youDiedText;
     [SerializeField] private float fadeDuration = 2f;
@@ -27,6 +34,22 @@ public class FadeToBlackAndLoadMenu : MonoBehaviour
 
     private IEnumerator FadeAndLoadMenu()
     {
+        hodanjeSource.Stop();
+        muzika.Stop();
+        AudioSource[] audioSources = monster.GetComponents<AudioSource>();
+
+            foreach (AudioSource audio in audioSources)
+            {
+                if (audio.clip != null && audio.clip.name == "brzocudoviste")
+                {
+                    audio.Stop(); 
+                    break;
+                }
+            }
+        jumpscareSource.Play();
+        chompSource.Play();
+        Invoke("PlayAudio", 1f);
+
         yield return new WaitForSeconds(0.6f);
 
         float timeElapsed = 0f;
@@ -53,5 +76,9 @@ public class FadeToBlackAndLoadMenu : MonoBehaviour
         SceneManager.LoadScene("main menu"); // vrati na main menu
 
         
+    }
+    void PlayAudio()
+    {
+        screamSource.Play();
     }
 }
