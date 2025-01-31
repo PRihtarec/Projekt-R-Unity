@@ -26,8 +26,7 @@ public class mainMenu : MonoBehaviour
         {
             optionsScript.LoadMouse();
         }
-        Cursor.visible = true; //postavljam cursor da bude vidljiv, fixa problem s cursorom nakon sto player umre ili pobijedi
-        Cursor.lockState = CursorLockMode.None;
+        
     
     }
     void Update()
@@ -47,8 +46,7 @@ public class mainMenu : MonoBehaviour
         }
     }
     public void PlayGame(){
-        Cursor.lockState = CursorLockMode.None;     
-        Cursor.visible = false;
+        
         SceneManager.LoadScene("Game");
         
     }

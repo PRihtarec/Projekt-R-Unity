@@ -47,6 +47,11 @@ public class FadeToBlackAndLoadMenu : MonoBehaviour
 
         yield return new WaitForSeconds(displayDuration);
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        
         SceneManager.LoadScene("main menu"); // vrati na main menu
+
+        
     }
 }
