@@ -23,13 +23,16 @@ public class KeypadMinigame : MonoBehaviour
     List<int> password;
     public Camera keypadCamera;
     public Camera mainCamera;
-
+    private MonsterController monsterController;
     [SerializeField] private Animator exitDoorAnimator;
 
     void Start()
     {
         numberManager = FindObjectOfType<NumberManager>();
         keypadCamera.gameObject.SetActive(false);
+        GameObject monster = GameObject.FindGameObjectWithTag("monster");
+        monsterController = monster.GetComponent<MonsterController>();
+        gameStarted= false;
     }
 
     void GenerateButtons()
@@ -103,6 +106,7 @@ public class KeypadMinigame : MonoBehaviour
         }
         else
         {
+            monsterController.setAggro(true);
             messageText.text = "Wrong! Try again.";
             passwordText.text = "";
             
