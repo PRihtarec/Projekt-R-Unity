@@ -87,7 +87,9 @@ public class PlayerPickupDrop : MonoBehaviour
                 else if (raycastHit2.transform.name == "KeypadTrigger") {
                     if (!keypadMinigame.isGameStarted()) //raycasta samo ako minigame nije pokrenut
                         {
-                        keypadMinigame.StartMinigame();
+                       // keypadMinigame.StartMinigame();
+                        keypadMinigame.Invoke("StartMinigame", 0f);
+                    //    keySource.Play();
                         }
                     else
                         {

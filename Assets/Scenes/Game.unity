@@ -47878,7 +47878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &636384597
 Transform:
   m_ObjectHideFlags: 0
@@ -47913,8 +47913,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.6182392, y: 1, z: 1}
+  m_Center: {x: 0.30912355, y: 0, z: 0}
 --- !u!23 &636384599
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -101808,16 +101808,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60af9897bc0c00145ad76bad7fc40567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongSource: {fileID: 1290914246}
-  passwordCorrect: {fileID: 0}
-  doorOpeningSound: {fileID: 0}
   buttonPrefab: {fileID: 2791054144775043472, guid: 0e5001402bfe33445a4c704eee078a6f, type: 3}
   buttonParent: {fileID: 593119354}
   messageText: {fileID: 1326277799}
   passwordText: {fileID: 0}
   keypadCamera: {fileID: 0}
   mainCamera: {fileID: 0}
-  exitDoorAnimator: {fileID: 0}
 --- !u!114 &1290914242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135104,11 +135100,11 @@ MonoBehaviour:
   hodanjeSource: {fileID: 1732671722}
   brzoHodanjeSource: {fileID: 1732671728}
   drugoCudoviste: {fileID: 1538622202}
-  sniffDetectionRange: 5
+  sniffDetectionRange: 20
   interrupt: 0
   mainCamera: {fileID: 963194227}
-  walkingSpeed: 2
-  runningSpeed: 4
+  walkingSpeed: 3
+  runningSpeed: 6
   body: {fileID: 1753327457}
 --- !u!195 &1732671716
 NavMeshAgent:
@@ -135144,9 +135140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed26ff1c77bae64988fc79c06c45aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchingRange: 1
-  walkingRange: 2
-  sprintingRange: 5
+  crouchingRange: 5
+  walkingRange: 9
+  sprintingRange: 15
   wallRangeMultiplier: 0.3
   flashlight: {fileID: 1576985575}
   flashlightLight: {fileID: 1576985577}
@@ -144146,7 +144142,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 330921096242136778, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1268375709573512075, guid: 7fa0970fbeb0f574ab75b9b3c54bf801, type: 3}
       propertyPath: m_Pivot.x
@@ -153285,6 +153281,10 @@ PrefabInstance:
     - target: {fileID: 2111780358539899329, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
       propertyPath: m_Name
       value: monsterCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630410691245244734, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
+      propertyPath: m_Depth
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8733608748181307168, guid: a8d2a566549cdb64fa537ebd823c8b25, type: 3}
       propertyPath: m_Enabled
@@ -171998,6 +171998,10 @@ PrefabInstance:
     - target: {fileID: 7417549112927347229, guid: bce84e9d68d868a4aa2a88f5c193dc82, type: 3}
       propertyPath: m_ReceiveShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484541793814713023, guid: bce84e9d68d868a4aa2a88f5c193dc82, type: 3}
+      propertyPath: m_Range
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7484541793814713023, guid: bce84e9d68d868a4aa2a88f5c193dc82, type: 3}
       propertyPath: m_Shadows.m_Strength

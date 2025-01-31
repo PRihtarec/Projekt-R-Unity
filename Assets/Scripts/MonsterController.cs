@@ -279,9 +279,9 @@ public class MonsterController : MonoBehaviour
 
         // Check if the object is in the camera's viewport
         
-        Debug.Log((viewportPos.z > 0 &&
-                        viewportPos.x > 0 && viewportPos.x < 1 &&
-                        viewportPos.y > 0 && viewportPos.y < 1) && HasLineOfSight(body.transform, Player.transform) && getPlayerDistance()<=15);
+       // Debug.Log((viewportPos.z > 0 &&
+         //               viewportPos.x > 0 && viewportPos.x < 1 &&
+          //              viewportPos.y > 0 && viewportPos.y < 1) && HasLineOfSight(body.transform, Player.transform) && getPlayerDistance()<=15);
         return (viewportPos.z > 0 &&
                         viewportPos.x > 0 && viewportPos.x < 1 &&
                         viewportPos.y > 0 && viewportPos.y < 1) && HasLineOfSight(body.transform, Player.transform) && getPlayerDistance()<=15;
