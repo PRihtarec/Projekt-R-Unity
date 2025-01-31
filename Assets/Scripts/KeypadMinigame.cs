@@ -40,7 +40,7 @@ public class KeypadMinigame : MonoBehaviour
         buttons.Clear();
 
         List<int> numbers = new List<int>();
-        for (int i = 1; i <= 10; i++) numbers.Add(i);
+        for (int i = 0; i <= 9; i++) numbers.Add(i);
 
         int columns = 5; 
         float spacingX = 80; 
